@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ES.InventoryRegister.XAML.ViewDevice"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ViewDevice" Height="417.333" Width="345" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="ViewDevice" Height="417.333" Width="345" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     
     <Grid Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
