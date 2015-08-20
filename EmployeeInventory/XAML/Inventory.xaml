@@ -1,0 +1,59 @@
+﻿<Window x:Class="ES.InventoryRegister.XAML.Inventory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Inventory" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid Margin="5,5,5,5" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Column="0" Margin="0,0,5,0">Search:</Label>
+            <TextBox x:Name="textBoxSearch" Grid.Column="0" Width="300"></TextBox>
+        </StackPanel>
+        
+        <StackPanel Width="Auto" Grid.Column="5" Orientation="Horizontal">
+            <Button x:Name="buttonExportCSV" Padding="10,0,10,0" Margin="0,0,5,0" Height="25">Export</Button>
+            <Button x:Name="buttonImportCSV" Padding="10,0,10,0" Margin="0,0,5,0" Height="25">Import</Button>
+            <Button x:Name="buttonAddDevice" Padding="5,0,5,0" Margin="0,0,5,0" Height="25">Add Device</Button>
+            <Button x:Name="buttonDepartments" Padding="5,0,5,0" Margin="0,0,5,0" Height="25">Departments</Button>
+            <Button x:Name="buttonEmployees" Padding="5,0,5,0" Height="25">Employees</Button>
+        </StackPanel>
+        
+        <ListView
+            x:Name="listViewInventory"
+            Grid.Row="2"
+            Grid.ColumnSpan="5"
+            SelectedItem="{Binding ES.InventoryRegister.ViewModels.InventoryItemViewModel}"
+            ItemsSource="{Binding Source=list}">
+            <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Height" Value="30"></Setter>
+                            <Setter Property="Padding" Value="0"></Setter>
+                            <Setter Property="Margin" Value="0"></Setter>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Header="No." Width="40" DisplayMemberBinding="{Binding Path=Number}"/>
+                    <GridViewColumn Header="Type" Width="110" DisplayMemberBinding="{Binding Path=TypeName}"/>
+                    <GridViewColumn Header="Name" Width="134" DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn Header="Owner" Width="140" DisplayMemberBinding="{Binding Path=OwnerName}"/>
+                    <GridViewColumn Header="Purchase Date" Width="120" DisplayMemberBinding="{Binding Path=PurchaseDate}"/>
+                    <GridViewColumn Header="Expiry Date" Width="120" DisplayMemberBinding="{Binding Path=ExpiryDate}"/>
+                    <GridViewColumn Header="Serial Number" Width="100" DisplayMemberBinding="{Binding Path=SerialNumber}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

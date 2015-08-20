@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="ES.InventoryRegister.XAML.UserControls.MonitorPropertyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="315">
+    <Grid ScrollViewer.CanContentScroll="True"
+          Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TextBlock VerticalAlignment="Center">Interfaces:</TextBlock>
+        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <CheckBox x:Name="checkBoxVGA" Margin="5" VerticalAlignment="Center" Grid.Column="2">VGA</CheckBox>
+            <CheckBox x:Name="checkBoxDVI" Margin="5" VerticalAlignment="Center" Grid.Column="2">DVI</CheckBox>
+            <CheckBox x:Name="checkBoxDisplayPort" Margin="5" VerticalAlignment="Center" Grid.Column="2">DisplayPort</CheckBox>
+            <CheckBox x:Name="checkBoxHDMI" Margin="5" VerticalAlignment="Center" Grid.Column="2">HDMI</CheckBox>
+        </StackPanel>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="2">Screen Size:</TextBlock>
+        <TextBox x:Name="textBoxScreenSize" Grid.Row="2" Grid.Column="2"></TextBox>
+    </Grid>
+</UserControl>

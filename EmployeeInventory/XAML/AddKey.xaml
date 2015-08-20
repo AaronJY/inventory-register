@@ -1,0 +1,28 @@
+﻿<Window x:Class="ES.InventoryRegister.XAML.AddKey"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddKey" Height="132.25" Width="243.75" ResizeMode="NoResize" SizeToContent="Height" WindowStartupLocation="CenterScreen">
+    <Grid Margin="5,5,5,5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock VerticalAlignment="Center">Name:</TextBlock>
+        <TextBox x:Name="textBoxName" Grid.Column="3"></TextBox>
+
+        <TextBlock Grid.Row="2" VerticalAlignment="Center">Value:</TextBlock>
+        <TextBox x:Name="textBoxValue" Grid.Column="3" Grid.Row="2"></TextBox>
+
+        <Button x:Name="buttonConfirm" Grid.ColumnSpan="3" Grid.Row="5">Confirm</Button>
+    </Grid>
+</Window>
