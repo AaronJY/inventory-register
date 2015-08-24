@@ -47,7 +47,8 @@ namespace ES.InventoryRegister.XAML
                 {
                     _propertyView2 = new PhonePropertyView();
                 }
-            } else if (type == typeof(Monitor))
+            }
+            else if (type == typeof(Monitor))
             {
                 _propertyView = new MonitorPropertyView();
             }
@@ -72,7 +73,8 @@ namespace ES.InventoryRegister.XAML
         }
 
         /// <summary>
-        /// Adds owners to owner boxes
+        /// Fetches employee list from the database and populates the
+        /// "Owner" combo box with the names
         /// </summary>
         private void PopulateOwners()
         {
@@ -80,6 +82,11 @@ namespace ES.InventoryRegister.XAML
             {
                 comboBoxOwner.ItemsSource = manager.EmployeeBusiness.GetEmployeesAsViewModels(true);
             }
+
+            // Get the device owner
+            EmployeeViewModel model = ((List<EmployeeViewModel>)comboBoxOwner.ItemsSource).FirstOrDefault(x => x.Id == _device.Owner.Id);
+            // Set the comboBox's selected item to the owner's employee view model
+            comboBoxOwner.SelectedItem = model;
         }
 
         /// <summary>
@@ -149,10 +156,22 @@ namespace ES.InventoryRegister.XAML
                     {
                         manager.DeviceBusiness.UpdateDevice(phone);
                     }
-
-                    MessageBox.Show("Successfully updated the device.", "Success");
+                }
+                else
+                {
+                    // Update the device
+                    using (BusinessManager manager = new BusinessManager())
+                    {
+                        manager.DeviceBusiness.UpdateDevice(computer);
+                    }
                 }
             }
+
+            // Alert the user that the device has been updated successfully
+            MessageBox.Show("Successfully updated the device.", "Success");
+
+            // Close the window
+            this.Close();
         }
 
         /// <summary>

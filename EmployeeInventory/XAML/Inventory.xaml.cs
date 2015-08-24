@@ -38,9 +38,6 @@ namespace ES.InventoryRegister.XAML
 
             // Populate inventory list with devices from DB
             GetDevices();
-
-            //ViewDevice dev = new ViewDevice();
-            //dev.Show();
         }
 
         void listViewInventory_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -48,7 +45,7 @@ namespace ES.InventoryRegister.XAML
             InventoryItemViewModel selectedDevice = (InventoryItemViewModel)listViewInventory.SelectedItem;
 
             ViewDevice viewDeviceWindow = new ViewDevice(selectedDevice.Id, selectedDevice.Type);
-            viewDeviceWindow.ShowDialog();
+            viewDeviceWindow.Show();
         }
 
         /// <summary>

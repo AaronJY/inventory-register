@@ -65,22 +65,10 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <param name="device">Device</param>
         public void UpdateDevice(Device device)
         {
-            Type deviceType = ObjectContext.GetObjectType(device.GetType());
+            Device currentDevice = GetDevice(device.Id);
 
-            device.UpdateDate = DateTime.Now;
-
-            _context.Set<Device>().Attach(device);
-            _context.Set<Employee>().Attach(device.Owner);
-
-            if (deviceType.IsSubclassOf(typeof(Computer)))
-            {
-                foreach (ProductKey key in ((Computer)device).ProductKeys)
-                {
-                    _context.Set<ProductKey>().Attach(key);
-                }
-            }
-
-            _context.Entry(device).State = EntityState.Modified;
+            _context.Entry(currentDevice).CurrentValues.SetValues(device);
+            _context.SaveChanges();
         }
     }
 }
