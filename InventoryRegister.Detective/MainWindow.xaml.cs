@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Management;
+using Microsoft.VisualBasic.Devices;
 
 namespace InventoryRegister.Detective
 {
@@ -25,6 +27,8 @@ namespace InventoryRegister.Detective
             InitializeComponent();
 
             buttonSave.Click += ButtonSave_Click;
+
+            CollectDetails();
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -38,6 +42,32 @@ namespace InventoryRegister.Detective
         private void CollectDetails()
         {
 
+            string diskSize =
+                WmiHelper.RequestWmi("SELECT Size FROM Win32_LogicalDisk WHERE DeviceID = 'C:'");
+            AddDetail("Disk Size", diskSize);
+
+            string processor =
+                WmiHelper.RequestWmi("SELECT Name FROM Win32_Processor");
+            AddDetail("Processor", processor);
+
+            string memory =
+                WmiHelper.RequestWmi("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem");
+            // Convert from bytes to GB
+            string memoryGb = Math.Round(long.Parse(memory) / 1024d / 1024d / 1024d).ToString();
+            AddDetail("Memory (GB)", memoryGb);
+
+            string os =
+                WmiHelper.RequestWmi("SELECT Caption FROM Win32_OperatingSystem");
+            AddDetail("Operating System", os);
+
+
+            MessageBox.Show(Environment.UserName);
+        }
+
+        private void AddDetail(string name, string text)
+        {
+            string newline = textBlockDetails.Text == "" ? "" : "\n";
+            textBlockDetails.Text += String.Format("{0}{1}: {2}", newline, name, text);
         }
     }
 }
