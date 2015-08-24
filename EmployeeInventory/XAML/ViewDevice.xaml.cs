@@ -96,7 +96,7 @@ namespace ES.InventoryRegister.XAML
                 }
 
                 // Show message box to user confirming the delete
-                MessageBox.Show("Successfully deleted device!");
+                MessageBox.Show("Successfully deleted the device.", "Success");
 
                 // Refresh device list
                 _inventoryInstance.GetDevices();
@@ -112,12 +112,18 @@ namespace ES.InventoryRegister.XAML
         /// </summary>
         private void PopulateOwners()
         {
+            // Get all employees in a view model format from
+            // the database
+            List<EmployeeViewModel> employeeViewModels;
             using (BusinessManager manager = new BusinessManager())
             {
-                comboBoxOwner.ItemsSource = manager.EmployeeBusiness.GetEmployeesAsViewModels();
+                employeeViewModels = manager.EmployeeBusiness.GetEmployeesAsViewModels();
             }
 
-            // Get the device owner
+            // Set the combo box item source to employeeViewModels
+            comboBoxOwner.ItemsSource = employeeViewModels;
+
+            // Find the combo box entry for the device owner
             EmployeeViewModel model = ((List<EmployeeViewModel>)comboBoxOwner.ItemsSource).FirstOrDefault(x => x.Id == _device.Owner.Id);
             // Set the comboBox's selected item to the owner's employee view model
             comboBoxOwner.SelectedItem = model;
