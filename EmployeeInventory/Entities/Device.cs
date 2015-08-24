@@ -31,5 +31,7 @@ namespace ES.InventoryRegister.Entities
         public string Name { get; set; }
 
         public string Notes { get; set; }
+
+        public bool Deleted { get; set; }
     }
 }

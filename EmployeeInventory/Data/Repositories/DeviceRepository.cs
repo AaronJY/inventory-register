@@ -37,6 +37,19 @@ namespace ES.InventoryRegister.Data.Repositories
         }
 
         /// <summary>
+        /// Returns a list of all devices
+        /// </summary>
+        /// <returns>List of devices</returns>
+        public List<Device> GetDevices()
+        {
+            List<Device> devices = _context.Set<Device>()
+                .Where(x => x.Deleted == false)
+                .ToList();
+
+            return devices;
+        }
+
+        /// <summary>
         /// Gets the device entity from the database
         /// </summary>
         /// <param name="deviceId">Device ID</param>
@@ -68,6 +81,16 @@ namespace ES.InventoryRegister.Data.Repositories
             Device currentDevice = GetDevice(device.Id);
 
             _context.Entry(currentDevice).CurrentValues.SetValues(device);
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Marks a device as deleted
+        /// </summary>
+        /// <param name="deviceId">Device ID</param>
+        public void DeleteDevice(int deviceId)
+        {
+            _context.Entry(GetDevice(deviceId)).Entity.Deleted = true;
             _context.SaveChanges();
         }
     }

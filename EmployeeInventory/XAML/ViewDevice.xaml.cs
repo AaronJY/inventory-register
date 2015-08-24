@@ -28,15 +28,19 @@ namespace ES.InventoryRegister.XAML
     {
         private UserControl _propertyView;
         private UserControl _propertyView2;
+        private Inventory _inventoryInstance;
         private Device _device;
 
-        public ViewDevice(int deviceId, Type type)
+        public ViewDevice(Inventory inventory, int deviceId, Type type)
         {
             InitializeComponent();
 
             #region Event listeners
             buttonSave.Click += buttonSave_Click;
+            buttonDelete.Click += buttonDelete_Click;
             #endregion
+
+            _inventoryInstance = inventory;
 
             // Figure out which user control to display
             if (type.IsSubclassOf(typeof(Computer)))
@@ -67,9 +71,39 @@ namespace ES.InventoryRegister.XAML
             PopulateOwners();
         }
 
+        void buttonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteDevice();
+        }
+
         void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             UpdateDevice();
+        }
+
+        /// <summary>
+        /// Deletes the currently loaded device
+        /// </summary>
+        private void DeleteDevice()
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this device?", "Confirmation", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                using (BusinessManager manager = new BusinessManager())
+                {
+                    manager.DeviceBusiness.DeleteDevice(_device.Id);
+                }
+
+                // Show message box to user confirming the delete
+                MessageBox.Show("Successfully deleted device!");
+
+                // Refresh device list
+                _inventoryInstance.GetDevices();
+
+                // Close the current window
+                this.Close();
+            }
         }
 
         /// <summary>
@@ -80,7 +114,7 @@ namespace ES.InventoryRegister.XAML
         {
             using (BusinessManager manager = new BusinessManager())
             {
-                comboBoxOwner.ItemsSource = manager.EmployeeBusiness.GetEmployeesAsViewModels(true);
+                comboBoxOwner.ItemsSource = manager.EmployeeBusiness.GetEmployeesAsViewModels();
             }
 
             // Get the device owner

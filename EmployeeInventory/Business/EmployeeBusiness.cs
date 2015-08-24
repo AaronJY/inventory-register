@@ -56,7 +56,7 @@ namespace ES.InventoryRegister.Business
             return false;
         }
 
-        public List<EmployeeViewModel> GetEmployeesAsViewModels(bool insertNullValue = false)
+        public List<EmployeeViewModel> GetEmployeesAsViewModels()
         {
             List<EmployeeViewModel> employeeModels;
             using (BusinessManager manager = new BusinessManager())
@@ -66,10 +66,6 @@ namespace ES.InventoryRegister.Business
                 // Map the employees to their respective view models
                 employeeModels = Mapper.Map<List<Employee>, List<EmployeeViewModel>>(employees);
             }
-
-            // Insert blank value
-            if (insertNullValue)
-                employeeModels.Insert(0, new EmployeeViewModel { Name = "(none)" });
 
             return employeeModels;
         }

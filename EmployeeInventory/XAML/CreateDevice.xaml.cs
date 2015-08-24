@@ -49,9 +49,6 @@ namespace ES.InventoryRegister.XAML
                 employeeModels = Mapper.Map<List<Employee>, List<EmployeeViewModel>>(employees);
             }
 
-            // Insert blank value
-            employeeModels.Insert(0, new EmployeeViewModel { Name = "(none)" });
-
             // Set the item source
             comboBoxOwner.ItemsSource = employeeModels;
         }

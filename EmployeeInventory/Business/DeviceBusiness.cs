@@ -32,7 +32,7 @@ namespace ES.InventoryRegister.Business
         /// <returns>List of devices</returns>
         public List<Device> GetDevices()
         {
-            return UnitOfWork.Devices.All().ToList();
+            return UnitOfWork.Devices.GetDevices();
         }
 
         /// <summary>
@@ -45,9 +45,21 @@ namespace ES.InventoryRegister.Business
             return UnitOfWork.Devices.GetDevice(deviceId);
         }
 
+        /// <summary>
+        /// Updates a device's values with the values of a passed
+        /// in device instance
+        /// </summary>
+        /// <param name="device">Device</param>
         public void UpdateDevice(Device device)
         {
             UnitOfWork.Devices.UpdateDevice(device);
         }
+
+
+        public void DeleteDevice(int deviceId)
+        {
+            UnitOfWork.Devices.DeleteDevice(deviceId);
+        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
     }
 }

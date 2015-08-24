@@ -44,7 +44,7 @@ namespace ES.InventoryRegister.XAML
         {
             InventoryItemViewModel selectedDevice = (InventoryItemViewModel)listViewInventory.SelectedItem;
 
-            ViewDevice viewDeviceWindow = new ViewDevice(selectedDevice.Id, selectedDevice.Type);
+            ViewDevice viewDeviceWindow = new ViewDevice(this, selectedDevice.Id, selectedDevice.Type);
             viewDeviceWindow.Show();
         }
 
