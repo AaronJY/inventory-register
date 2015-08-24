@@ -163,7 +163,7 @@ namespace ES.InventoryRegister.XAML
             
             // Get ID of currently selected owner
             int id = ((EmployeeViewModel)comboBoxOwner.SelectedItem).Id;
-            // Get the entity from the database
+            // Get the owner entity from the database
             using (BusinessManager manager = new BusinessManager())
             {
                 device.Owner = manager.EmployeeBusiness.GetEmployee(id);

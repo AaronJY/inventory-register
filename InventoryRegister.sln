@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryRegister", "EmployeeInventory\InventoryRegister.csproj", "{B70045D9-0EBF-4A98-9FE9-A1EAF9C8F023}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryRegister.Detective", "InventoryRegister.Detective\InventoryRegister.Detective.csproj", "{8A52586D-3784-45BE-A44E-9E317BCB4485}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{B70045D9-0EBF-4A98-9FE9-A1EAF9C8F023}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B70045D9-0EBF-4A98-9FE9-A1EAF9C8F023}.Release|x86.ActiveCfg = Release|x86
 		{B70045D9-0EBF-4A98-9FE9-A1EAF9C8F023}.Release|x86.Build.0 = Release|x86
+		{8A52586D-3784-45BE-A44E-9E317BCB4485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A52586D-3784-45BE-A44E-9E317BCB4485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A52586D-3784-45BE-A44E-9E317BCB4485}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A52586D-3784-45BE-A44E-9E317BCB4485}.Debug|x86.Build.0 = Debug|Any CPU
+		{8A52586D-3784-45BE-A44E-9E317BCB4485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A52586D-3784-45BE-A44E-9E317BCB4485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A52586D-3784-45BE-A44E-9E317BCB4485}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A52586D-3784-45BE-A44E-9E317BCB4485}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
