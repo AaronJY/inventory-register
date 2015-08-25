@@ -66,7 +66,6 @@ namespace ES.InventoryRegister.XAML
             {
                 _device = manager.DeviceBusiness.GetDevice(deviceId);
             }
-
             
             // Try&catch to gracefully take care of errors that crop up
             // when trying to load a device
@@ -77,8 +76,7 @@ namespace ES.InventoryRegister.XAML
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("There was an error while loading this device.", "Error");
-                ErrorHandler.Show(ex, "This is a test!");
+                ErrorHandler.Show(ex, "There was an error while loading this device.");
             }
         }
 
