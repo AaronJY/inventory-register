@@ -34,10 +34,38 @@ namespace ES.InventoryRegister.XAML
             buttonDepartments.Click += buttonDepartments_Click;
             buttonAddDevice.Click += buttonAddDevice_Click;
             listViewInventory.MouseDoubleClick += listViewInventory_MouseDoubleClick;
+            contextMenuInventory.Opened += contextMenuInventory_Opened;
             #endregion
 
             // Populate inventory list with devices from DB
             GetDevices();
+        }
+
+        void contextMenuInventory_Opened(object sender, RoutedEventArgs e)
+        {
+            List<string[]> itemEntries = new List<string[]>();
+
+            contextMenuInventory.Items.Clear();
+
+            if (listViewInventory.SelectedItems.Count > 1)
+            {
+                itemEntries = new List<string[]> {
+                    new string[] {"Delete devices", "DeleteDevice"}
+                };
+            }
+            else
+            {
+                itemEntries = new List<string[]> {
+                    new string[] {"View", "ViewDevice"},
+                    new string[] {"Delete", "DeleteDevices"}
+                };
+            }
+
+            foreach (string[] itemEntry in itemEntries)
+            {
+                MenuItem item = new MenuItem { Header = itemEntry[0], Name = itemEntry[1] };
+                contextMenuInventory.Items.Add(item);
+            }
         }
 
         void listViewInventory_MouseDoubleClick(object sender, MouseButtonEventArgs e)

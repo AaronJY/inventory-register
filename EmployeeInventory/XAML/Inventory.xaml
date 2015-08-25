@@ -54,6 +54,12 @@
                     <GridViewColumn Header="Serial Number" Width="100" DisplayMemberBinding="{Binding Path=SerialNumber}"/>
                 </GridView>
             </ListView.View>
+            
+            <ListView.ContextMenu>
+                <ContextMenu x:Name="contextMenuInventory">
+                    
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
     </Grid>
 </Window>
