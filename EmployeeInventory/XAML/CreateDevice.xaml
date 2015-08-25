@@ -4,7 +4,7 @@
         Title="Create Device" Height="322" Width="300" ResizeMode="NoResize" SizeToContent="Height" WindowStartupLocation="CenterScreen"
         xmlns:entities="clr-namespace:ES.InventoryRegister.Entities"
         xmlns:viewmodels="clr-namespace:ES.InventoryRegister.ViewModels">
-    <Grid Margin="5,5,5,5">
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>

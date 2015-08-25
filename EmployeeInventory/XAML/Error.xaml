@@ -25,9 +25,13 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="buttonExpandExcpetion"
-                Grid.Column="2" Click="buttonExpandExcpetion_Click">Show details</Button>
+                Grid.Column="2"
+                Click="buttonExpandExcpetion_Click"
+                Height="25">Show details</Button>
 
-            <Button x:Name="buttonClose" Click="buttonClose_Click">Close</Button>
+            <Button x:Name="buttonClose"
+                    Click="buttonClose_Click"
+                    Height="25">Close</Button>
         </Grid>
 
 
