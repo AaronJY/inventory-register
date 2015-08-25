@@ -67,8 +67,18 @@ namespace ES.InventoryRegister.XAML
                 _device = manager.DeviceBusiness.GetDevice(deviceId);
             }
 
-            PopulateFields();
-            PopulateOwners();
+            
+            // Try&catch to gracefully take care of errors that crop up
+            // when trying to load a device
+            try
+            {
+                PopulateFields();
+                PopulateOwners();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was an error while loading this device.", "Error");
+            }
         }
 
         void buttonDelete_Click(object sender, RoutedEventArgs e)
