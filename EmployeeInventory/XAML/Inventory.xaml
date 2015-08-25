@@ -35,7 +35,7 @@
             Grid.Row="2"
             Grid.ColumnSpan="5"
             SelectedItem="{Binding ES.InventoryRegister.ViewModels.InventoryItemViewModel}"
-            ItemsSource="{Binding Source=list}">
+            ItemsSource="{Binding Source=list}" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.View>
                 <GridView>
                     <GridView.ColumnHeaderContainerStyle>

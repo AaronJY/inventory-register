@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Management;
 using Microsoft.VisualBasic.Devices;
+using System.Xml.Serialization;
+using System.IO;
+using System.Xml;
 
 namespace InventoryRegister.Detective
 {
@@ -42,9 +45,9 @@ namespace InventoryRegister.Detective
         private void CollectDetails()
         {
 
-            string diskSize =
-                WmiHelper.RequestWmi("SELECT Size FROM Win32_LogicalDisk WHERE DeviceID = 'C:'");
-            AddDetail("Disk Size", diskSize);
+            int diskSize =
+                Int32.Parse(WmiHelper.RequestWmi("SELECT Size FROM Win32_LogicalDisk WHERE DeviceID = 'C:'"));
+            AddDetail("Disk Size", diskSize.ToString());
 
             string processor =
                 WmiHelper.RequestWmi("SELECT Name FROM Win32_Processor");
@@ -53,13 +56,12 @@ namespace InventoryRegister.Detective
             string memory =
                 WmiHelper.RequestWmi("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem");
             // Convert from bytes to GB
-            string memoryGb = Math.Round(long.Parse(memory) / 1024d / 1024d / 1024d).ToString();
-            AddDetail("Memory (GB)", memoryGb);
+            double memoryGb = Math.Round(long.Parse(memory) / 1024d / 1024d / 1024d);
+            AddDetail("Memory (GB)", memoryGb.ToString());
 
             string os =
                 WmiHelper.RequestWmi("SELECT Caption FROM Win32_OperatingSystem");
             AddDetail("Operating System", os);
-
 
             MessageBox.Show(Environment.UserName);
         }
@@ -69,5 +71,33 @@ namespace InventoryRegister.Detective
             string newline = textBlockDetails.Text == "" ? "" : "\n";
             textBlockDetails.Text += String.Format("{0}{1}: {2}", newline, name, text);
         }
+    }
+
+    public class Device
+    {
+        public string Owner { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class Computer : Device
+    {
+        public int DiskSize { get; set; }
+        public int Memory { get; set; }
+        public string OperatingSystem { get; set; }
+    }
+
+    public class Desktop : Computer
+    {
+
+    }
+
+    public class Laptop : Computer
+    {
+
+    }
+
+    public class Tablet : Computer
+    {
+
     }
 }
