@@ -77,7 +77,8 @@ namespace ES.InventoryRegister.XAML
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was an error while loading this device.", "Error");
+                //MessageBox.Show("There was an error while loading this device.", "Error");
+                ErrorHandler.Show(ex, "This is a test!");
             }
         }
 
