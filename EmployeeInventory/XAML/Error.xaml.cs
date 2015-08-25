@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,9 +55,11 @@ namespace ES.InventoryRegister.XAML
             Error error = new Error(ex, message);
             error.ShowDialog();
 
-            System.IO.StreamWriter file = new System.IO.StreamWriter("ExceptionLog.txt");
-            file.Write(String.Format("{0}{3}{1}{3}{2}{3}{3}", DateTime.Now.ToString(), ex.ToString(), "--------------------------", Environment.NewLine));
-            file.Close();
+            using (FileStream fs = new FileStream("ExceptionLog.txt", FileMode.Append, FileAccess.Write))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                sw.WriteLine(String.Format("{0}{2}{1}{2}", DateTime.Now.ToString(), ex.ToString(),  Environment.NewLine));
+            }
 
             return error;
         }
