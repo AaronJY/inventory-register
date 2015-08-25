@@ -54,6 +54,10 @@ namespace ES.InventoryRegister.XAML
             Error error = new Error(ex, message);
             error.ShowDialog();
 
+            System.IO.StreamWriter file = new System.IO.StreamWriter("ExceptionLog.txt");
+            file.Write(String.Format("{0}{3}{1}{3}{2}{3}{3}", DateTime.Now.ToString(), ex.ToString(), "--------------------------", Environment.NewLine));
+            file.Close();
+
             return error;
         }
     }
