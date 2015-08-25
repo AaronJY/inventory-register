@@ -99,6 +99,7 @@ namespace ES.InventoryRegister.XAML
 
             if (result == MessageBoxResult.Yes)
             {
+                // Mark the device as deleted in the database
                 using (BusinessManager manager = new BusinessManager())
                 {
                     manager.DeviceBusiness.DeleteDevice(_device.Id);

@@ -42,6 +42,9 @@ namespace ES.InventoryRegister.XAML
 
         void listViewInventory_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (e.LeftButton != MouseButtonState.Pressed) return;
+            if (listViewInventory.SelectedItems.Count < 1) return;
+
             InventoryItemViewModel selectedDevice = (InventoryItemViewModel)listViewInventory.SelectedItem;
 
             ViewDevice viewDeviceWindow = new ViewDevice(this, selectedDevice.Id, selectedDevice.Type);
