@@ -40,7 +40,7 @@
                 <GridView>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="GridViewColumnHeader">
-                            <Setter Property="Height" Value="30"></Setter>
+                            <Setter Property="Height" Value="25"></Setter>
                             <Setter Property="Padding" Value="0"></Setter>
                             <Setter Property="Margin" Value="0"></Setter>
                         </Style>
@@ -57,7 +57,6 @@
             
             <ListView.ContextMenu>
                 <ContextMenu x:Name="contextMenuInventory">
-                    
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
