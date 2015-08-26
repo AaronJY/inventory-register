@@ -52,14 +52,15 @@ namespace ES.InventoryRegister.XAML
         /// <returns></returns>
         public static Error Show(Exception ex, string message)
         {
-            Error error = new Error(ex, message);
-            error.ShowDialog();
-
             using (FileStream fs = new FileStream("ExceptionLog.txt", FileMode.Append, FileAccess.Write))
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                sw.WriteLine(String.Format("{0}{2}{1}{2}", DateTime.Now.ToString(), ex.ToString(),  Environment.NewLine));
+                sw.WriteLine(String.Format("{0}{2}{1}{2}", DateTime.Now.ToString(), ex.ToString(), Environment.NewLine));
+
             }
+
+            Error error = new Error(ex, message);
+            error.ShowDialog();
 
             return error;
         }
