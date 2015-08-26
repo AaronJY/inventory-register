@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using ES.InventoryRegister.Data.Infrastructure;
 using System.Windows.Threading;
@@ -26,11 +27,9 @@ namespace ES.InventoryRegister
             connectionWindow = new DatabaseConnection();
             connectionWindow.Show();
 
-            // Create the initial connection to the database
             InventoryDbContext context = new InventoryDbContext();
 
             this.Startup += App_Startup;
-
             base.OnStartup(e);
         }
 

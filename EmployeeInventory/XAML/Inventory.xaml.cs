@@ -35,10 +35,17 @@ namespace ES.InventoryRegister.XAML
             buttonAddDevice.Click += buttonAddDevice_Click;
             listViewInventory.MouseDoubleClick += listViewInventory_MouseDoubleClick;
             contextMenuInventory.Opened += contextMenuInventory_Opened;
+            this.Closed += Inventory_Closed;
             #endregion
 
             // Populate inventory list with devices from DB
             GetDevices();
+        }
+
+        void Inventory_Closed(object sender, EventArgs e)
+        {
+            // Close the application when the inventory window is closed
+            Application.Current.Shutdown();
         }
 
         void contextMenuInventory_Opened(object sender, RoutedEventArgs e)
