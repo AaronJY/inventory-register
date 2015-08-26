@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ES.InventoryRegister.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,19 @@ namespace ES.InventoryRegister.XAML.UserControls
     /// </summary>
     public partial class ComputerPropertyView : UserControl
     {
+        public List<KeyListViewModel> KeyViewModels;
+
         public ComputerPropertyView()
         {
             InitializeComponent();
+
+            KeyViewModels = new List<KeyListViewModel>();
+        }
+
+        public void AddKey(KeyListViewModel viewModel)
+        {
+            KeyViewModels.Add(viewModel);
+            listViewKeys.ItemsSource = KeyViewModels;
         }
     }
 }

@@ -38,6 +38,9 @@ namespace ES.InventoryRegister
             connectionWindow.Hide();
         }
 
+        /**
+         * HANDLE EXCEPTIONS GRACEFULLY
+         */
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             ErrorHandler.Show((Exception)e.ExceptionObject, "An unhandled exception has occured! The details have been logged.");

@@ -48,9 +48,9 @@ namespace ES.InventoryRegister.XAML
         /// Shows the error window and populates it with information
         /// with the given exception
         /// </summary>
-        /// <param name="ex"></param>
-        /// <returns></returns>
-        public static Error Show(Exception ex, string message)
+        /// <param name="ex">Exception</param>
+        /// <param name="message">Message</param>
+        public static void Show(Exception ex, string message)
         {
             using (FileStream fs = new FileStream("ExceptionLog.txt", FileMode.Append, FileAccess.Write))
             using (StreamWriter sw = new StreamWriter(fs))
@@ -61,8 +61,6 @@ namespace ES.InventoryRegister.XAML
 
             Error error = new Error(ex, message);
             error.ShowDialog();
-
-            return error;
         }
     }
 }
