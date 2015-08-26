@@ -25,8 +25,8 @@ namespace ES.InventoryRegister.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=.\\; Integrated Security=True; MultipleActiveResultSets=True; Database=Inve" +
-            "ntory;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=./; Integrated Security=False; MultipleActiveResultSets=True; Database=Inv" +
+            "entory;")]
         public string InventoryDbConnectionString {
             get {
                 return ((string)(this["InventoryDbConnectionString"]));

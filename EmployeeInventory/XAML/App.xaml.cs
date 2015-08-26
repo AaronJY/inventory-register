@@ -16,12 +16,27 @@ namespace ES.InventoryRegister
     /// </summary>
     public partial class App : Application
     {
+        DatabaseConnection connectionWindow;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             AutoMapperConfiguration.Configure();
-            InventoryDbContext ctx = new InventoryDbContext();
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            connectionWindow = new DatabaseConnection();
+            connectionWindow.Show();
+
+            // Create the initial connection to the database
+            InventoryDbContext context = new InventoryDbContext();
+
+            this.Startup += App_Startup;
+
             base.OnStartup(e);
+        }
+
+        void App_Startup(object sender, StartupEventArgs e)
+        {
+            connectionWindow.Hide();
         }
 
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

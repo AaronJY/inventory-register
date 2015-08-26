@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="InventoryDbConnectionString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Server=.\; Integrated Security=True; MultipleActiveResultSets=True; Database=Inventory;</Value>
+      <Value Profile="(Default)">Server=./; Integrated Security=False; MultipleActiveResultSets=True; Database=Inventory;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
