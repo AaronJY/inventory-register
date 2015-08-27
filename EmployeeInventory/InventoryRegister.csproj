@@ -161,6 +161,9 @@
     <Compile Include="XAML\Error.xaml.cs">
       <DependentUpon>Error.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XAML\ManageConnections.xaml.cs">
+      <DependentUpon>ManageConnections.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XAML\ManageEmployees.xaml.cs">
       <DependentUpon>ManageEmployees.xaml</DependentUpon>
     </Compile>
@@ -233,6 +236,10 @@
       <DependentUpon>Inventory.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="XAML\ManageConnections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="XAML\ManageEmployees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

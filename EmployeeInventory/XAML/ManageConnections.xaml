@@ -1,0 +1,23 @@
+﻿<Window x:Class="ES.InventoryRegister.XAML.ManageConnections"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Manage DB Connection" Height="113" Width="477" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" SizeToContent="Height">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock VerticalAlignment="Center">Connection String:</TextBlock>
+        <TextBox x:Name="textBoxConnectionString" Grid.Column="2" Width="Auto"></TextBox>
+        
+        <Button x:Name="buttonSave" Grid.Row="3" Grid.ColumnSpan="3">Save and Restart Application</Button>
+    </Grid>
+</Window>

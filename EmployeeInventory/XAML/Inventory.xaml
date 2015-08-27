@@ -19,10 +19,11 @@
         
         <StackPanel Orientation="Horizontal">
             <Label Grid.Column="0" Margin="0,0,5,0">Search:</Label>
-            <TextBox x:Name="textBoxSearch" Grid.Column="0" Width="300"></TextBox>
+            <TextBox x:Name="textBoxSearch" Grid.Column="0" Width="200"></TextBox>
         </StackPanel>
         
         <StackPanel Width="Auto" Grid.Column="5" Orientation="Horizontal">
+            <Button x:Name="buttonConnection" Padding="10,0,10,0" Margin="0,0,5,0" Height="25">Connection Settings</Button>
             <Button x:Name="buttonExportCSV" Padding="10,0,10,0" Margin="0,0,5,0" Height="25">Export</Button>
             <Button x:Name="buttonImportCSV" Padding="10,0,10,0" Margin="0,0,5,0" Height="25">Import</Button>
             <Button x:Name="buttonAddDevice" Padding="5,0,5,0" Margin="0,0,5,0" Height="25">Add Device</Button>

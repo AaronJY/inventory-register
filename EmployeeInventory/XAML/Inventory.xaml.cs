@@ -36,10 +36,16 @@ namespace ES.InventoryRegister.XAML
             listViewInventory.MouseDoubleClick += listViewInventory_MouseDoubleClick;
             contextMenuInventory.Opened += contextMenuInventory_Opened;
             this.Closed += Inventory_Closed;
+            buttonConnection.Click += buttonConnection_Click;
             #endregion
 
             // Populate inventory list with devices from DB
             GetDevices();
+        }
+
+        void buttonConnection_Click(object sender, RoutedEventArgs e)
+        {
+            OpenConnectionSettingsWindow();
         }
 
         void Inventory_Closed(object sender, EventArgs e)
@@ -107,6 +113,15 @@ namespace ES.InventoryRegister.XAML
             ManageEmployees mangeEmployeesWindow = new ManageEmployees();
             // Show the window
             mangeEmployeesWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// Opens the connection settings window
+        /// </summary>
+        private void OpenConnectionSettingsWindow()
+        {
+            ManageConnections manageConnectionsWindow = new ManageConnections();
+            manageConnectionsWindow.ShowDialog();
         }
 
         void buttonAddDevice_Click(object sender, RoutedEventArgs e)
