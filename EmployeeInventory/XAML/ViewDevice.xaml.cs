@@ -47,9 +47,6 @@ namespace ES.InventoryRegister.XAML
             {
                 _propertyView = new ComputerPropertyView();
 
-                // Add event listeners for view
-                (_propertyView as ComputerPropertyView).buttonAddKey.Click += ComputerPropertyView_ButtonAddKey_Click;
-
                 if (type == typeof(Phone))
                 {
                     _propertyView2 = new PhonePropertyView();
@@ -80,25 +77,6 @@ namespace ES.InventoryRegister.XAML
             catch (Exception ex)
             {
                 ErrorHandler.Show(ex, "There was an error while loading this device.");
-            }
-        }
-
-        private void ComputerPropertyView_ButtonAddKey_Click(object sender, RoutedEventArgs e)
-        {
-            ComputerPropertyView view = (_propertyView as ComputerPropertyView);
-
-            AddKey addKeyWindow = new AddKey();
-            addKeyWindow.ShowDialog();
-
-            if (addKeyWindow.DialogResult.HasValue)
-            {
-                KeyListViewModel keyViewModel = new KeyListViewModel
-                {
-                    Name = addKeyWindow.Name,
-                    Key = addKeyWindow.KeyValue
-                };
-
-                view.AddKey(keyViewModel);
             }
         }
 

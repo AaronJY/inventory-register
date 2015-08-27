@@ -27,13 +27,30 @@ namespace ES.InventoryRegister.XAML.UserControls
         {
             InitializeComponent();
 
+            listViewKeys.ItemsSource = KeyViewModels;
             KeyViewModels = new List<KeyListViewModel>();
+
+            buttonAddKey.Click += ButtonAddKey_Click;
         }
 
-        public void AddKey(KeyListViewModel viewModel)
+        private void ButtonAddKey_Click(object sender, RoutedEventArgs e)
         {
-            KeyViewModels.Add(viewModel);
-            listViewKeys.ItemsSource = KeyViewModels;
+            // Create and show a new AddKey window
+            AddKey addKeyWindow = new AddKey();
+            addKeyWindow.ShowDialog();
+
+            // Check to see if 
+            if (addKeyWindow.DialogResult.HasValue && addKeyWindow.DialogResult.Value)
+            {
+                KeyListViewModel keyViewModel = new KeyListViewModel();
+                keyViewModel.Key = addKeyWindow.KeyValue;
+                keyViewModel.Name = addKeyWindow.KeyName;
+
+                KeyViewModels.Add(keyViewModel);
+
+                listViewKeys.ItemsSource = KeyViewModels;
+                listViewKeys.Items.Refresh();
+            }
         }
     }
 }
