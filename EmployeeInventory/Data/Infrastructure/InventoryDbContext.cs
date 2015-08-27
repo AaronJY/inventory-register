@@ -7,14 +7,27 @@ using System.Threading.Tasks;
 using ES.InventoryRegister.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Core;
+using System.IO;
 
 namespace ES.InventoryRegister.Data.Infrastructure
 {
     public class InventoryDbContext : DbContext
     {
-        public InventoryDbContext()
-            : base(Properties.Settings.Default.InventoryDbConnectionString)
+        // Create a variable that can be accessed through
+        // method base() that returns the connection string
+        // saved in the text file
+        public static string connectionString
         {
+            get
+            {
+                return DbManager.GetConnectionString();
+            }
+        }
+
+        public InventoryDbContext()
+            : base(connectionString)
+        {
+
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
 
             Database.SetInitializer(new InventoryDbInitializer());
@@ -24,6 +37,8 @@ namespace ES.InventoryRegister.Data.Infrastructure
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             CreateTables(modelBuilder);
+
+            Console.WriteLine(GetConnectionString());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -45,6 +60,12 @@ namespace ES.InventoryRegister.Data.Infrastructure
             modelBuilder.Entity<Department>()
                 .Property(m => m.Id).
                 HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+        }
+
+        public string GetConnectionString()
+        {
+            string connectionString = File.ReadAllText("ConnectionString.txt");
+            return connectionString ?? null;
         }
     }
 }

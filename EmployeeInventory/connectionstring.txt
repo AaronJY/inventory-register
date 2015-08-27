@@ -1,0 +1,1 @@
+﻿Server=./; Integrated Security=False; MultipleActiveResultSets=True; Database=Inventory;

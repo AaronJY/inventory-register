@@ -22,7 +22,6 @@ namespace ES.InventoryRegister.XAML
         public ManageConnections()
         {
             InitializeComponent();
-
             #region Event listeners
             #endregion
         }
