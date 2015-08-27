@@ -22,5 +22,17 @@ namespace ES.InventoryRegister.Data.Infrastructure
                 return null;
             }
         }
+
+        public static void SaveConnectionString(string connectionString)
+        {
+            try
+            {
+                System.IO.File.WriteAllText("ConnectionString.txt", connectionString);
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Show(ex, "There was an issue saving the connection string to 'ConnectionString.txt'. Please make sure the file is accessible.");
+            }
+        }
     }
 }
