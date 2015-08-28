@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using ES.InventoryRegister.XAML;
 
 namespace ES.InventoryRegister.Data.Repositories
 {
@@ -78,9 +79,31 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <param name="device">Device</param>
         public void UpdateDevice(Device device)
         {
+            Console.WriteLine("Owner of sent object: {0}", device.Owner.Name);
+
             Device currentDevice = GetDevice(device.Id);
 
             _context.Entry(currentDevice).CurrentValues.SetValues(device);
+
+            // REMOVE TRY AND CATCH WHEN NEXT TRYING TO SOLVE
+            try
+            {
+                _context.Entry(currentDevice.Owner).CurrentValues.SetValues(device.Owner);
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Show(ex, "There was an issue updating the owner of the submitted object. The attempt has been abandoned");
+            }
+            
+            // If the device is a computer
+            if (device.GetType().IsSubclassOf(typeof(Computer)))
+            {
+                Computer currentComputer = currentDevice as Computer;
+                Computer computer = device as Computer;
+
+                //_context.Entry(currentComputer.ProductKeys).CurrentValues.SetValues(computer.ProductKeys);
+            }
+
             _context.SaveChanges();
         }
 
