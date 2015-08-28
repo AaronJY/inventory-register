@@ -24,10 +24,8 @@ namespace ES.InventoryRegister.Data.Infrastructure
             }
         }
 
-        public InventoryDbContext()
-            : base(connectionString)
+        public InventoryDbContext() : base(connectionString)
         {
-
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
 
             Database.SetInitializer(new InventoryDbInitializer());
@@ -60,12 +58,6 @@ namespace ES.InventoryRegister.Data.Infrastructure
             modelBuilder.Entity<Department>()
                 .Property(m => m.Id).
                 HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-        }
-
-        public string GetConnectionString()
-        {
-            string connectionString = File.ReadAllText("ConnectionString.txt");
-            return connectionString ?? null;
         }
     }
 }
