@@ -55,6 +55,8 @@ namespace ES.InventoryRegister.XAML
 
         void buttonNext_Click(object sender, RoutedEventArgs e)
         {
+            bool created = false;
+
             string name = textBoxName.Text.Trim();
             string typeStr = comboBoxType.Text;
             string make = textBoxMake.Text.Trim();
@@ -151,7 +153,7 @@ namespace ES.InventoryRegister.XAML
                 // Show the computer details window
                 cdc.ShowDialog();
 
-                if (cdc.DialogResult.HasValue)
+                if (cdc.DialogResult.HasValue && cdc.DialogResult.Value == true)
                 {
                     if (type == typeof(Phone))
                     {
@@ -161,7 +163,7 @@ namespace ES.InventoryRegister.XAML
                         cdp.ShowDialog();
 
                         // When the "Next..." button has been clicked in the phone details window
-                        if (cdp.DialogResult.HasValue)
+                        if (cdp.DialogResult.HasValue && cdp.DialogResult.Value)
                         {
                             // Get the entity from the phone details window
                             Phone phone = cdp.Entity;
@@ -171,6 +173,8 @@ namespace ES.InventoryRegister.XAML
                             {
                                 manager.DeviceBusiness.AddDevice(phone);
                             }
+
+                            created = true;
                         }
                     }
                     else
@@ -187,6 +191,8 @@ namespace ES.InventoryRegister.XAML
                         {
                             manager.DeviceBusiness.AddDevice(computer);
                         }
+
+                        created = true;
                     }
                 }
             }
@@ -198,7 +204,7 @@ namespace ES.InventoryRegister.XAML
                 cdm.ShowDialog();
 
                 // When the "Next..." button has been clicked in the monitor details window
-                if (cdm.DialogResult.HasValue)
+                if (cdm.DialogResult.HasValue && cdm.DialogResult.Value)
                 {
                     // Get the entity from the other window
                     Monitor monitor = cdm.Entity;
@@ -208,11 +214,16 @@ namespace ES.InventoryRegister.XAML
                     {
                         manager.DeviceBusiness.AddDevice(monitor);
                     }
+
+                    created = true;
                 }
             }
 
-            // Show a message letting the user know that the device has been created
-            MessageBox.Show("Your device has successfully been added to the database", "Success");
+            // Check to see if the device has been created successfully
+            if (created)
+            {
+                MessageBox.Show("Your device has successfully been added to the database", "Success");
+            }
 
             // Refresh the device list
             _inventoryInstance.GetDevices();

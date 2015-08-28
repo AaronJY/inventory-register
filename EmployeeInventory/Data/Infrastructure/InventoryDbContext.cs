@@ -36,8 +36,6 @@ namespace ES.InventoryRegister.Data.Infrastructure
         {
             CreateTables(modelBuilder);
 
-            Console.WriteLine(GetConnectionString());
-
             base.OnModelCreating(modelBuilder);
         }
 
