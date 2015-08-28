@@ -37,6 +37,7 @@ namespace ES.InventoryRegister.XAML
             contextMenuInventory.Opened += contextMenuInventory_Opened;
             this.Closed += Inventory_Closed;
             buttonConnection.Click += buttonConnection_Click;
+            buttonDepartments.Click += buttonDepartments_Click;
             #endregion
 
             // Populate inventory list with devices from DB
@@ -97,11 +98,8 @@ namespace ES.InventoryRegister.XAML
         /// </summary>
         private void OpenCreateDeviceWindow()
         {
-            // Create a new instance of the CreateDevice window and pass the Inventory object in
-            // so it can be referenced later
             CreateDevice createDeviceWindow = new CreateDevice(this);
-            // Show the window
-            createDeviceWindow.Show();
+            createDeviceWindow.ShowDialog();
         }
 
         /// <summary>
@@ -109,9 +107,7 @@ namespace ES.InventoryRegister.XAML
         /// </summary>
         private void OpenManageEmployeesWindow()
         {
-            // Create a new instance of the ManageEmployee window
             ManageEmployees mangeEmployeesWindow = new ManageEmployees();
-            // Show the window
             mangeEmployeesWindow.ShowDialog();
         }
 
@@ -124,6 +120,15 @@ namespace ES.InventoryRegister.XAML
             manageConnectionsWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// Opens the window to manage departments
+        /// </summary>
+        private void OpenManageDepartmentsWindow()
+        {
+            ManageDepartments manageDeparmentsWindow = new ManageDepartments();
+            manageDeparmentsWindow.ShowDialog();
+        }
+
         void buttonAddDevice_Click(object sender, RoutedEventArgs e)
         {
             OpenCreateDeviceWindow();
@@ -131,6 +136,7 @@ namespace ES.InventoryRegister.XAML
 
         void buttonDepartments_Click(object sender, RoutedEventArgs e)
         {
+            OpenManageDepartmentsWindow();
         }
 
         void buttonEmployees_Click(object sender, RoutedEventArgs e)

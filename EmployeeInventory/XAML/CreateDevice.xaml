@@ -65,6 +65,7 @@
                     SelectedDateFormat="Long" FirstDayOfWeek="Monday"></DatePicker>
 
         <TextBlock Grid.Row="14" VerticalAlignment="Center">Owner:</TextBlock>
+        
         <ComboBox x:Name="comboBoxOwner" Grid.Row="14" Grid.Column="2"
                   DisplayMemberPath="Name" SelectedItem="{Binding Path=EmployeeViewModel}"
                   VerticalContentAlignment="Center" />
