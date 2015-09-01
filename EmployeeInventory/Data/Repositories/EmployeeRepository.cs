@@ -18,12 +18,20 @@ namespace ES.InventoryRegister.Data.Repositories
             _context = context;
         }
 
+        /// <summary>
+        /// Add a new employee to the database
+        /// </summary>
+        /// <param name="employee">Employee object</param>
         public void AddEmployee(Employee employee)
         {
             employee.CreationDate = DateTime.Now;
             _context.Set<Employee>().Add(employee);
         }
 
+        /// <summary>
+        /// Removes an employee from the database with a specific ID
+        /// </summary>
+        /// <param name="employeeId">Employee ID</param>
         public void RemoveEmployee(int employeeId)
         {
             List<Device> devices = _context.Set<Device>().ToList();
@@ -35,6 +43,11 @@ namespace ES.InventoryRegister.Data.Repositories
             base.Delete(employeeId);
         }
 
+        /// <summary>
+        /// Get an employee from the database with a specific ID
+        /// </summary>
+        /// <param name="employeeId">Employee ID</param>
+        /// <returns></returns>
         public Employee GetEmployee(int employeeId)
         {
             return _context.Set<Employee>().Single(x => x.Id == employeeId);
