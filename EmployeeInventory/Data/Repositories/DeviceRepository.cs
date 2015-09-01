@@ -67,6 +67,7 @@ namespace ES.InventoryRegister.Data.Repositories
             {
                 device = _context.Set<Computer>()
                     .Include(x => x.ProductKeys)
+                    .Include(x => x.Owner)
                     .FirstOrDefault(x => x.Id == deviceId);
             }
             
@@ -76,34 +77,20 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <summary>
         /// Updates a device with a given Device's values
         /// </summary>
-        /// <param name="device">Device</param>
-        public void UpdateDevice(Device device)
+        /// <param name="newDevice">Device</param>
+        public void UpdateDevice(Device newDevice)
         {
-            Console.WriteLine("Owner of sent object: {0}", device.Owner.Name);
+            // Get the device currently existing in the database
+            Device existingDevice = GetDevice(newDevice.Id);
 
-            Device currentDevice = GetDevice(device.Id);
+            // Update the existing device's base properties with the
+            // passed in device's base properties
+            _context.Entry(existingDevice).CurrentValues.SetValues(newDevice);
 
-            _context.Entry(currentDevice).CurrentValues.SetValues(device);
+            // Update the existing device's owner
+            _context.Entry(existingDevice.Owner).CurrentValues.SetValues(newDevice.Owner);
 
-            // REMOVE TRY AND CATCH WHEN NEXT TRYING TO SOLVE
-            try
-            {
-                _context.Entry(currentDevice.Owner).CurrentValues.SetValues(device.Owner);
-            }
-            catch (Exception ex)
-            {
-                ErrorHandler.Show(ex, "There was an issue updating the owner of the submitted object. The attempt has been abandoned");
-            }
-            
-            // If the device is a computer
-            if (device.GetType().IsSubclassOf(typeof(Computer)))
-            {
-                Computer currentComputer = currentDevice as Computer;
-                Computer computer = device as Computer;
-
-                //_context.Entry(currentComputer.ProductKeys).CurrentValues.SetValues(computer.ProductKeys);
-            }
-
+            // Save the changes to the database
             _context.SaveChanges();
         }
 
