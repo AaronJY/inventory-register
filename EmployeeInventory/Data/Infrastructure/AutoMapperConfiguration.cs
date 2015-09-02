@@ -27,7 +27,6 @@ namespace ES.InventoryRegister.Data.Infrastructure
                 .ForMember(x => x.CreationDate, opt => opt.Ignore())
                 .ForMember(x => x.UpdateDate, opt => opt.Ignore());
 
-            int num = 0;
             Mapper.CreateMap<Device, InventoryItemViewModel>()
                 .ForMember(x => x.Number, o => o.MapFrom(args => args.Id))
                 .ForMember(x => x.PurchaseDate, opt => opt.MapFrom(args => ((DateTime)args.PurchaseDate).ToString("MMMM dd yyyy")))
@@ -35,8 +34,9 @@ namespace ES.InventoryRegister.Data.Infrastructure
                 .ForMember(x => x.OwnerName, opt => opt.MapFrom(args => args.Owner.Name))
                 .AfterMap((src, dest) =>
                     {
-                        num++;
-                        dest.Number = num;
+                        // Set to 0 for now until I figure out how
+                        // to increment the number on each mapping!
+                        dest.Number = 0;
 
                         // Get the entity type
                         dest.Type = ObjectContext.GetObjectType(src.GetType());
@@ -47,7 +47,6 @@ namespace ES.InventoryRegister.Data.Infrastructure
                         {
                             dest.OwnerName = "(none)";
                         }
-                            
                     });
 
             Mapper.AssertConfigurationIsValid();

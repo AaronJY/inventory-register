@@ -91,8 +91,8 @@ namespace ES.InventoryRegister.Data.Repositories
             // passed in device's base properties
             _context.Entry(existingDevice).CurrentValues.SetValues(newDevice);
 
-            // Update the existing device's owner
-            _context.Entry(existingDevice.Owner).CurrentValues.SetValues(newDevice.Owner);
+            //// Update the existing device's owner
+            //_context.Entry(existingDevice.Owner).CurrentValues.SetValues(newDevice.Owner);
 
             // Save the changes to the database
             _context.SaveChanges();

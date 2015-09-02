@@ -144,6 +144,8 @@ namespace ES.InventoryRegister.XAML
         /// </summary>
         private void UpdateDevice()
         {
+            BusinessManager manager = new BusinessManager();
+
             // Get the type of the stored device
             Type deviceType = ObjectContext.GetObjectType(_device.GetType());
 
@@ -174,10 +176,7 @@ namespace ES.InventoryRegister.XAML
             // Get ID of currently selected owner
             int id = ((EmployeeViewModel)comboBoxOwner.SelectedItem).Id;
             // Get the owner entity from the database
-            using (BusinessManager manager = new BusinessManager())
-            {
-                device.Owner = manager.EmployeeBusiness.GetEmployee(id);
-            }
+            device.Owner = manager.EmployeeBusiness.GetEmployee(id);
 
             // If the entity is a computer...
             if (deviceType.IsSubclassOf(typeof(Computer)))
@@ -202,23 +201,22 @@ namespace ES.InventoryRegister.XAML
                     phone.HasCamera = view2.checkBoxHasCamera.IsChecked ?? false;
 
                     // Update the device
-                    using (BusinessManager manager = new BusinessManager())
-                    {
-                        manager.DeviceBusiness.UpdateDevice(phone);
-                    }
+                    manager.DeviceBusiness.UpdateDevice(phone);
                 }
                 else
                 {
-                    // Update the device
-                    using (BusinessManager manager = new BusinessManager())
-                    {
-                        manager.DeviceBusiness.UpdateDevice(computer);
-                    }
+                    manager.DeviceBusiness.UpdateDevice(computer);
                 }
             }
 
             // Alert the user that the device has been updated successfully
             MessageBox.Show("Successfully updated the device.", "Success");
+
+            // Refresh the devices list for Inventory.xaml
+            _inventoryInstance.GetDevices();
+
+            // Dispose of the business manager
+            manager.Dispose();
 
             // Close the window
             this.Close();
