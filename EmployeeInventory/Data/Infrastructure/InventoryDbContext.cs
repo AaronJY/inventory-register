@@ -13,9 +13,10 @@ namespace ES.InventoryRegister.Data.Infrastructure
 {
     public class InventoryDbContext : DbContext
     {
-        // Create a variable that can be accessed through
-        // method base() that returns the connection string
-        // saved in the text file
+        /// <summary>
+        /// Is used by constructor to get the saved
+        /// connection string
+        /// </summary>
         public static string connectionString
         {
             get
@@ -39,6 +40,10 @@ namespace ES.InventoryRegister.Data.Infrastructure
             base.OnModelCreating(modelBuilder);
         }
 
+        /// <summary>
+        /// Creates database tables if they don't already exist
+        /// </summary>
+        /// <param name="modelBuilder">Model Builder</param>
         private void CreateTables(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Device>()

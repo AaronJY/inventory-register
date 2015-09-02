@@ -22,7 +22,7 @@ namespace ES.InventoryRegister.Data.Repositories
         }
 
         /// <summary>
-        /// Creates a new device
+        /// Creates a new device entry in the database
         /// </summary>
         /// <param name="device">Device entity</param>
         public void AddDevice(Device device)
@@ -38,7 +38,7 @@ namespace ES.InventoryRegister.Data.Repositories
         }
 
         /// <summary>
-        /// Returns a list of all devices
+        /// Returns a list of all devices currently in the database
         /// </summary>
         /// <returns>List of devices</returns>
         public List<Device> GetDevices()
@@ -51,12 +51,15 @@ namespace ES.InventoryRegister.Data.Repositories
         }
 
         /// <summary>
-        /// Gets the device entity from the database
+        /// Gets a device entity from the database with a
+        /// given ID
         /// </summary>
         /// <param name="deviceId">Device ID</param>
         /// <returns>Device</returns>
         public Device GetDevice(int deviceId)
         {
+            // Select the first device in the database
+            // that has the passed in ID
             Device device = _context.Set<Device>()
                 .Include(x => x.Owner)
                 .FirstOrDefault(x => x.Id == deviceId);
@@ -75,7 +78,8 @@ namespace ES.InventoryRegister.Data.Repositories
         }
 
         /// <summary>
-        /// Updates a device with a given Device's values
+        /// Updates a device entity in the database with
+        /// the property values of a passed in entity
         /// </summary>
         /// <param name="newDevice">Device</param>
         public void UpdateDevice(Device newDevice)
@@ -95,12 +99,13 @@ namespace ES.InventoryRegister.Data.Repositories
         }
 
         /// <summary>
-        /// Marks a device as deleted
+        /// Marks a device as deleted in the database
         /// </summary>
         /// <param name="deviceId">Device ID</param>
         public void DeleteDevice(int deviceId)
         {
             _context.Entry(GetDevice(deviceId)).Entity.Deleted = true;
+
             _context.SaveChanges();
         }
     }

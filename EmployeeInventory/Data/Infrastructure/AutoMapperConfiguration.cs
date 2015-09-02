@@ -10,10 +10,13 @@ using System.Data.Entity.Core.Objects;
 
 namespace ES.InventoryRegister.Data.Infrastructure
 {
+    /// <summary>
+    /// Used for defining AutoMapper configuration
+    /// </summary>
     public static class AutoMapperConfiguration
     {
         /// <summary>
-        /// Configures AutoMappper
+        /// Configures AutoMappper mappings
         /// </summary>
         public static void Configure()
         {

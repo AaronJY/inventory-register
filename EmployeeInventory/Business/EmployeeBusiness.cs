@@ -9,6 +9,9 @@ using AutoMapper;
 
 namespace ES.InventoryRegister.Business
 {
+    /// <summary>
+    /// Used to perform employee-based logic
+    /// </summary>
     public class EmployeeBusiness : BusinessBase
     {
         private BusinessManager _businessManager;
@@ -19,28 +22,56 @@ namespace ES.InventoryRegister.Business
             _businessManager = businessManager;
         }
 
+        /// <summary>
+        /// Tells the EmployeeRepository to add a new employee
+        /// to the database
+        /// </summary>
+        /// <param name="employee">Employee</param>
         public void AddEmployee(Employee employee)
         {
             UnitOfWork.Employees.Add(employee);
         }
 
+        /// <summary>
+        /// Gets a list of all employees from the database
+        /// </summary>
+        /// <returns>Employees</returns>
         public List<Employee> GetEmployees()
         {
             return UnitOfWork.Employees.All().ToList();
         }
 
+        /// <summary>
+        /// Tells the EmployeeRepository to remove an
+        /// employee from the database
+        /// </summary>
+        /// <param name="employeeId">Employee ID</param>
         public void RemoveEmployee(int employeeId)
         {
             UnitOfWork.Employees.Delete(employeeId);
         }
 
+        /// <summary>
+        /// Tells the EmployeeRepository to pass back
+        /// an employee from the database with the
+        /// given ID
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
         public Employee GetEmployee(int employeeId)
         {
             return UnitOfWork.Employees.GetEmployee(employeeId);
         }
 
+        /// <summary>
+        /// Checks if an employee currently exists in the
+        /// database with a given name
+        /// </summary>
+        /// <param name="employeeName">Employee's name</param>
+        /// <returns>Result</returns>
         public bool IsEmployeeNameUsed(string employeeName)
         {
+            // Get employees from the database
             List<Employee> employees;
             using (BusinessManager manager = new BusinessManager())
             {
@@ -56,6 +87,12 @@ namespace ES.InventoryRegister.Business
             return false;
         }
 
+        /// <summary>
+        /// Tells the EmployeeRepository to get a list of
+        /// employees from the database which are then
+        /// converted into their respective view models
+        /// </summary>
+        /// <returns>Empployee view models</returns>
         public List<EmployeeViewModel> GetEmployeesAsViewModels()
         {
             List<EmployeeViewModel> employeeModels;

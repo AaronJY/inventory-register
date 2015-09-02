@@ -9,6 +9,9 @@ using ES.InventoryRegister.Entities;
 
 namespace ES.InventoryRegister.Data.Infrastructure
 {
+    /// <summary>
+    /// Used for defining database configuration
+    /// </summary>
     public class InventoryDbConfiguration : DbMigrationsConfiguration<InventoryDbContext>
     {
         public InventoryDbConfiguration()
@@ -17,6 +20,10 @@ namespace ES.InventoryRegister.Data.Infrastructure
             AutomaticMigrationDataLossAllowed = true;
         }
 
+        /// <summary>
+        /// Populates database with data
+        /// </summary>
+        /// <param name="context"></param>
         protected override void Seed(InventoryDbContext context)
         {
             string[] departments = {

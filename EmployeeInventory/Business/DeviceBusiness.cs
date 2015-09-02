@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ES.InventoryRegister.Business
 {
+    /// <summary>
+    /// Used to perform device-based logic
+    /// </summary>
     public class DeviceBusiness : BusinessBase
     {
         private BusinessManager _businessManager;
@@ -20,7 +23,7 @@ namespace ES.InventoryRegister.Business
         /// <summary>
         /// Creates a new device in the database
         /// </summary>
-        /// <param name="device"></param>
+        /// <param name="device">Device</param>
         public void AddDevice(Device device)
         {
             UnitOfWork.Devices.AddDevice(device);
@@ -39,7 +42,7 @@ namespace ES.InventoryRegister.Business
         /// Gets the device from the database
         /// </summary>
         /// <param name="deviceId">Device ID</param>
-        /// <returns>Device</returns>
+        /// <returns>Device ID</returns>
         public Device GetDevice(int deviceId)
         {
             return UnitOfWork.Devices.GetDevice(deviceId);
@@ -55,7 +58,10 @@ namespace ES.InventoryRegister.Business
             UnitOfWork.Devices.UpdateDevice(device);
         }
 
-
+        /// <summary>
+        /// Marks a device as deleted in the database
+        /// </summary>
+        /// <param name="deviceId">Device ID</param>
         public void DeleteDevice(int deviceId)
         {
             UnitOfWork.Devices.DeleteDevice(deviceId);

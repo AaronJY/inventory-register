@@ -9,6 +9,10 @@ namespace ES.InventoryRegister.Data.Infrastructure
 {
     public static class DbManager
     {
+        /// <summary>
+        /// Gets the connection string saved in ConnectionString.txt
+        /// </summary>
+        /// <returns>Connection string</returns>
         public static string GetConnectionString()
         {
             try
@@ -23,6 +27,11 @@ namespace ES.InventoryRegister.Data.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Saves the passed-in connection string to
+        /// ConenectionString.txt
+        /// </summary>
+        /// <param name="connectionString">Connection string</param>
         public static void SaveConnectionString(string connectionString)
         {
             try

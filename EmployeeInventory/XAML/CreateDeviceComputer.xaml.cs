@@ -24,7 +24,6 @@ namespace ES.InventoryRegister.XAML
     public partial class CreateDeviceComputer : Window
     {
         public Computer Entity;
-        public List<ProductKey> ProductKeys;
 
         public CreateDeviceComputer(Computer entity)
         {
@@ -86,7 +85,8 @@ namespace ES.InventoryRegister.XAML
                 .Select(item => item)
                 .ToList();
 
-            ProductKeys = Mapper.Map(items, ProductKeys);
+            // Convert view models back to product key entities
+            Entity.ProductKeys = Mapper.Map(items, Entity.ProductKeys);
             
             DialogResult = true;
         }

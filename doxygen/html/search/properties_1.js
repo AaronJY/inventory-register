@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['connectionstring',['connectionString',['../class_e_s_1_1_inventory_register_1_1_data_1_1_infrastructure_1_1_inventory_db_context.html#aad1d989bb754b61dc7db09b95e27b1de',1,'ES::InventoryRegister::Data::Infrastructure::InventoryDbContext']]],
-  ['creationdate',['CreationDate',['../class_e_s_1_1_inventory_register_1_1_entities_1_1_department.html#a357ab6755c8786be238dc63a301ed6c8',1,'ES.InventoryRegister.Entities.Department.CreationDate()'],['../class_e_s_1_1_inventory_register_1_1_entities_1_1_device.html#a0680cba32783dd893fbb2b992c4c619b',1,'ES.InventoryRegister.Entities.Device.CreationDate()'],['../class_e_s_1_1_inventory_register_1_1_entities_1_1_employee.html#af59b50cc475b002aad1d6ffaf0320b24',1,'ES.InventoryRegister.Entities.Employee.CreationDate()'],['../interface_e_s_1_1_inventory_register_1_1_entities_1_1_i_entity.html#a42eddb23d68ed86ba0e3a6ce1e2998ca',1,'ES.InventoryRegister.Entities.IEntity.CreationDate()'],['../class_e_s_1_1_inventory_register_1_1_entities_1_1_product_key.html#a55611b1fee7e96885667c5508edfae40',1,'ES.InventoryRegister.Entities.ProductKey.CreationDate()']]]
-];

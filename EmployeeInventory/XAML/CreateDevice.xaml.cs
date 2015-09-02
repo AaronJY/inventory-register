@@ -33,23 +33,26 @@ namespace ES.InventoryRegister.XAML
             buttonNext.Click += buttonNext_Click;
             #endregion
 
-            PopulateOwnersDropdown();
-
+            // Store the inventory instance so it can be accessed later
             _inventoryInstance = inventoryInstance;
+
+            PopulateOwnersDropdown();
         }
 
+        /// <summary>
+        /// Gets a list of employee view models and populates
+        /// the owner drop-down with them
+        /// </summary>
         private void PopulateOwnersDropdown()
         {
+            // Get view models from the business
             List<EmployeeViewModel> employeeModels;
             using (BusinessManager manager = new BusinessManager())
             {
-                // Fetch a list of employees in the database
-                List<Employee> employees = manager.EmployeeBusiness.GetEmployees();
-                // Map the employees to their respective view models
-                employeeModels = Mapper.Map<List<Employee>, List<EmployeeViewModel>>(employees);
+                employeeModels = manager.EmployeeBusiness.GetEmployeesAsViewModels();
             }
 
-            // Set the item source
+            // Set the item source as the view models
             comboBoxOwner.ItemsSource = employeeModels;
         }
 
@@ -181,10 +184,6 @@ namespace ES.InventoryRegister.XAML
                     {
                         // Get the entity from the other window
                         Computer computer = cdc.Entity;
-                        // Apply product keys from other window to entity
-
-                        ///!! Does this need to be done here?!
-                        computer.ProductKeys = cdc.ProductKeys;
 
                         // Add the device to the database
                         using (BusinessManager manager = new BusinessManager())

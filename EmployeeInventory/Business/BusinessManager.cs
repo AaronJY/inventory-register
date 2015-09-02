@@ -56,6 +56,11 @@ namespace ES.InventoryRegister.Business
             }
         }
 
+        /// <summary>
+        /// Gets an entity type from a passed in string
+        /// </summary>
+        /// <param name="str">Type string</param>
+        /// <returns>Entity type</returns>
         public Type GetEntityTypeFromStr(string str)
         {
             switch (str)

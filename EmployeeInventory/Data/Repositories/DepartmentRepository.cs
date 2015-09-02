@@ -27,6 +27,5 @@ namespace ES.InventoryRegister.Data.Repositories
         {
             return _context.Set<Department>().FirstOrDefault(x => x.Name == name);
         }
-            
     }
 }

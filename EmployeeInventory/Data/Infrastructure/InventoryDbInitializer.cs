@@ -11,7 +11,6 @@ namespace ES.InventoryRegister.Data.Infrastructure
     {
         public InventoryDbInitializer()
         {
-
         }
     }
 }
