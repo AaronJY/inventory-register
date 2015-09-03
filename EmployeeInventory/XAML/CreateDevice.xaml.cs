@@ -225,7 +225,7 @@ namespace ES.InventoryRegister.XAML
             }
 
             // Refresh the device list
-            _inventoryInstance.GetDevices();
+            _inventoryInstance.PopulateDeviceList();
 
             // Close the create device window
             this.Close();

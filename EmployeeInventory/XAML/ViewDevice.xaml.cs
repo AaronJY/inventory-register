@@ -109,7 +109,7 @@ namespace ES.InventoryRegister.XAML
                 MessageBox.Show("Successfully deleted the device.", "Success");
 
                 // Refresh device list
-                _inventoryInstance.GetDevices();
+                _inventoryInstance.PopulateDeviceList();
 
                 // Close the current window
                 this.Close();
@@ -181,8 +181,8 @@ namespace ES.InventoryRegister.XAML
             // If the entity is a computer...
             if (deviceType.IsSubclassOf(typeof(Computer)))
             {
-                ComputerPropertyView view = (ComputerPropertyView)_propertyView;
-                Computer computer = (Computer)device;
+                ComputerPropertyView view = _propertyView as ComputerPropertyView;
+                Computer computer = device as Computer;
                 computer.Processor = view.textBoxProcessor.Text;
                 computer.DiskSpace = Int32.Parse(view.textBoxStorage.Text);
                 computer.Memory = Int32.Parse(view.textBoxMemory.Text);
@@ -208,12 +208,27 @@ namespace ES.InventoryRegister.XAML
                     manager.DeviceBusiness.UpdateDevice(computer);
                 }
             }
+            else if (deviceType == typeof(Monitor))
+            {
+                MonitorPropertyView view = _propertyView as MonitorPropertyView;
+                Monitor monitor = device as Monitor;
+                monitor.ScreenSize = Int32.Parse(view.textBoxScreenSize.Text);
+
+                monitor.DisplayInterfaces = new DisplayInterfaces();
+                monitor.DisplayInterfaces.DVI = view.checkBoxDVI.IsChecked ?? false;
+                monitor.DisplayInterfaces.VGA = view.checkBoxVGA.IsChecked ?? false;
+                monitor.DisplayInterfaces.HDMI = view.checkBoxHDMI.IsChecked ?? false;
+                monitor.DisplayInterfaces.DisplayPort = view.checkBoxDisplayPort.IsChecked ?? false;
+
+                // Update the device
+                manager.DeviceBusiness.UpdateDevice(monitor);
+            }
 
             // Alert the user that the device has been updated successfully
             MessageBox.Show("Successfully updated the device.", "Success");
 
             // Refresh the devices list for Inventory.xaml
-            _inventoryInstance.GetDevices();
+            _inventoryInstance.PopulateDeviceList();
 
             // Dispose of the business manager
             manager.Dispose();

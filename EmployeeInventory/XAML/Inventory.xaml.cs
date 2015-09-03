@@ -34,14 +34,12 @@ namespace ES.InventoryRegister.XAML
             buttonDepartments.Click += buttonDepartments_Click;
             buttonAddDevice.Click += buttonAddDevice_Click;
             listViewInventory.MouseDoubleClick += listViewInventory_MouseDoubleClick;
-            contextMenuInventory.Opened += contextMenuInventory_Opened;
             this.Closed += Inventory_Closed;
             buttonConnection.Click += buttonConnection_Click;
-            buttonDepartments.Click += buttonDepartments_Click;
             #endregion
 
             // Populate inventory list with devices from DB
-            GetDevices();
+            PopulateDeviceList();
         }
 
         void buttonConnection_Click(object sender, RoutedEventArgs e)
@@ -53,33 +51,6 @@ namespace ES.InventoryRegister.XAML
         {
             // Close the application when the inventory window is closed
             Application.Current.Shutdown();
-        }
-
-        void contextMenuInventory_Opened(object sender, RoutedEventArgs e)
-        {
-            List<string[]> itemEntries = new List<string[]>();
-
-            contextMenuInventory.Items.Clear();
-
-            if (listViewInventory.SelectedItems.Count > 1)
-            {
-                itemEntries = new List<string[]> {
-                    new string[] {"Delete devices", "DeleteDevice"}
-                };
-            }
-            else
-            {
-                itemEntries = new List<string[]> {
-                    new string[] {"View", "ViewDevice"},
-                    new string[] {"Delete", "DeleteDevices"}
-                };
-            }
-
-            foreach (string[] itemEntry in itemEntries)
-            {
-                MenuItem item = new MenuItem { Header = itemEntry[0], Name = itemEntry[1] };
-                contextMenuInventory.Items.Add(item);
-            }
         }
 
         void listViewInventory_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -126,7 +97,7 @@ namespace ES.InventoryRegister.XAML
         private void OpenManageDepartmentsWindow()
         {
             ManageDepartments manageDeparmentsWindow = new ManageDepartments();
-            manageDeparmentsWindow.ShowDialog();
+            manageDeparmentsWindow.Show();
         }
 
         void buttonAddDevice_Click(object sender, RoutedEventArgs e)
@@ -147,7 +118,7 @@ namespace ES.InventoryRegister.XAML
         /// <summary>
         /// Populates the inventory list with devices from the database
         /// </summary>
-        public void GetDevices()
+        public void PopulateDeviceList()
         {
             List<Device> devices;
             List<InventoryItemViewModel> deviceModels;
