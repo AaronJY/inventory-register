@@ -23,5 +23,4 @@ This software is written in .NET's C# using WPF for the UI. Data is stored in an
 
 ###Screenshots###
 
-
-![Inventory_2015-09-03_15-56-54.png](https://bitbucket.org/repo/byoGAK/images/559594253-Inventory_2015-09-03_15-56-54.png)
+Screenshots can be found here: https://imgur.com/a/tlDCc
