@@ -41,10 +41,10 @@ namespace ES.InventoryRegister.Data.Repositories
         /// Returns a list of all devices currently in the database
         /// </summary>
         /// <returns>List of devices</returns>
-        public List<Device> GetDevices()
+        public List<Device> GetDevices(bool includeDeleted = false)
         {
             List<Device> devices = _context.Set<Device>()
-                .Where(x => x.Deleted == false)
+                .Where(x => (x.Deleted == false && includeDeleted == false))
                 .ToList();
 
             return devices;

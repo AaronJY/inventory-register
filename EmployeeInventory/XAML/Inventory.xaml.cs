@@ -36,10 +36,31 @@ namespace ES.InventoryRegister.XAML
             listViewInventory.MouseDoubleClick += listViewInventory_MouseDoubleClick;
             this.Closed += Inventory_Closed;
             buttonConnection.Click += buttonConnection_Click;
+            buttonExportXML.Click += buttonExportXML_Click;
             #endregion
 
             // Populate inventory list with devices from DB
             PopulateDeviceList();
+        }
+
+        void buttonExportXML_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            saveFileDialog.Filter = "XML File (*.xml)|*.xml";
+            saveFileDialog.RestoreDirectory = true;
+            saveFileDialog.FilterIndex = 0;
+
+            // Check if the file browser dialog has been OK'd
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                // Tell the business manager to run the export method
+                using (BusinessManager manager = new BusinessManager())
+                {
+                    manager.ExportAsXml(saveFileDialog.FileName);
+                }
+
+                MessageBox.Show(String.Format("Successfully exported to '{0}'.", saveFileDialog.FileName), "Success");
+            }
         }
 
         void buttonConnection_Click(object sender, RoutedEventArgs e)
@@ -62,42 +83,6 @@ namespace ES.InventoryRegister.XAML
 
             ViewDevice viewDeviceWindow = new ViewDevice(this, selectedDevice.Id, selectedDevice.Type);
             viewDeviceWindow.ShowDialog();
-        }
-
-        /// <summary>
-        /// Opens the window to create a new device
-        /// </summary>
-        private void OpenCreateDeviceWindow()
-        {
-            CreateDevice createDeviceWindow = new CreateDevice(this);
-            createDeviceWindow.ShowDialog();
-        }
-
-        /// <summary>
-        /// Opens the window to manage employees
-        /// </summary>
-        private void OpenManageEmployeesWindow()
-        {
-            ManageEmployees mangeEmployeesWindow = new ManageEmployees();
-            mangeEmployeesWindow.ShowDialog();
-        }
-
-        /// <summary>
-        /// Opens the connection settings window
-        /// </summary>
-        private void OpenConnectionSettingsWindow()
-        {
-            ManageConnections manageConnectionsWindow = new ManageConnections();
-            manageConnectionsWindow.ShowDialog();
-        }
-
-        /// <summary>
-        /// Opens the window to manage departments
-        /// </summary>
-        private void OpenManageDepartmentsWindow()
-        {
-            ManageDepartments manageDeparmentsWindow = new ManageDepartments();
-            manageDeparmentsWindow.Show();
         }
 
         void buttonAddDevice_Click(object sender, RoutedEventArgs e)
@@ -131,6 +116,41 @@ namespace ES.InventoryRegister.XAML
             }
 
             listViewInventory.ItemsSource = deviceModels;
+        }
+
+        /// <summary>
+        /// Opens the window to manage departments
+        /// </summary>
+        private void OpenManageDepartmentsWindow()
+        {
+            ManageDepartments manageDeparmentsWindow = new ManageDepartments();
+            manageDeparmentsWindow.Show();
+        }
+        /// <summary>
+        /// Opens the window to create a new device
+        /// </summary>
+        private void OpenCreateDeviceWindow()
+        {
+            CreateDevice createDeviceWindow = new CreateDevice(this);
+            createDeviceWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// Opens the window to manage employees
+        /// </summary>
+        private void OpenManageEmployeesWindow()
+        {
+            ManageEmployees mangeEmployeesWindow = new ManageEmployees();
+            mangeEmployeesWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// Opens the connection settings window
+        /// </summary>
+        private void OpenConnectionSettingsWindow()
+        {
+            ManageConnections manageConnectionsWindow = new ManageConnections();
+            manageConnectionsWindow.ShowDialog();
         }
     }
 }
