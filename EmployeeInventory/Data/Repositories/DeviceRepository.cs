@@ -84,16 +84,56 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <param name="newDevice">Device</param>
         public void UpdateDevice(Device newDevice)
         {
+            //!!! Really should use reflection to auto populate
+            //!!! properties for the below!
+
             // Get the device currently existing in the database
             Device existingDevice = GetDevice(newDevice.Id);
+            // Get the type of the device
+            Type deviceType = ObjectContext.GetObjectType(existingDevice.GetType());
 
-            // Update the existing device's base properties with the
-            // passed in device's base properties
-            _context.Entry(existingDevice).CurrentValues.SetValues(newDevice);
+            existingDevice.Owner = newDevice.Owner;
+            existingDevice.Make = newDevice.Make;
+            existingDevice.Model = newDevice.Model;
+            existingDevice.PurchaseDate = newDevice.PurchaseDate;
+            existingDevice.ExpiryDate = newDevice.ExpiryDate;
+            existingDevice.SerialNumber = newDevice.SerialNumber;
+            existingDevice.Name = newDevice.Name;
+            existingDevice.Notes = newDevice.Notes;
 
-            //// Update the existing device's owner
-            //_context.Entry(existingDevice.Owner).CurrentValues.SetValues(newDevice.Owner);
+            // Update UpdateDate
+            existingDevice.UpdateDate = DateTime.Now;
 
+            // Update values based on the type of device
+            if (deviceType.IsSubclassOf(typeof(Computer)))
+            {
+                Computer existingComputer = existingDevice as Computer;
+                Computer newComputer = newDevice as Computer;
+
+                existingComputer.DiskSpace = newComputer.DiskSpace;
+                existingComputer.Processor = newComputer.Processor;
+                existingComputer.Memory = newComputer.Memory;
+                existingComputer.DiskType = newComputer.DiskType;
+                existingComputer.OperatingSystem = newComputer.OperatingSystem;
+                existingComputer.ProductKeys = newComputer.ProductKeys;
+
+                if (deviceType == typeof(Phone))
+                {
+                    Phone existingPhone = existingComputer as Phone;
+                    Phone newPhone = newComputer as Phone;
+
+                    existingPhone.HasCamera = newPhone.HasCamera;
+                }
+            } 
+            else if (deviceType == typeof(Monitor))
+            {
+                Monitor existingMonitor = existingDevice as Monitor;
+                Monitor newMonitor = newDevice as Monitor;
+
+                existingMonitor.DisplayInterfaces = newMonitor.DisplayInterfaces;
+                existingMonitor.ScreenSize = newMonitor.ScreenSize;
+            }
+            
             // Save the changes to the database
             _context.SaveChanges();
         }
