@@ -190,6 +190,9 @@
     <Compile Include="XAML\UserControls\MonitorPropertyView.xaml.cs">
       <DependentUpon>MonitorPropertyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XAML\UserControls\NumberBox.xaml.cs">
+      <DependentUpon>NumberBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XAML\UserControls\PhonePropertyView.xaml.cs">
       <DependentUpon>PhonePropertyView.xaml</DependentUpon>
     </Compile>
@@ -273,6 +276,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="XAML\UserControls\NumberBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="XAML\UserControls\PhonePropertyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -300,6 +307,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="InventoryRegister_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

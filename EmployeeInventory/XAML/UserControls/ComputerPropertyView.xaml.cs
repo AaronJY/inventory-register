@@ -31,6 +31,17 @@ namespace ES.InventoryRegister.XAML.UserControls
             KeyViewModels = new List<KeyListViewModel>();
 
             buttonAddKey.Click += ButtonAddKey_Click;
+            buttonDeleteKey.Click += buttonDeleteKey_Click;
+        }
+
+        void buttonDeleteKey_Click(object sender, RoutedEventArgs e)
+        {
+            if (listViewKeys.SelectedItem != null)
+            {
+                KeyViewModels.Remove((KeyListViewModel)listViewKeys.SelectedItem);
+                listViewKeys.Items.Refresh();
+            }
+                
         }
 
         private void ButtonAddKey_Click(object sender, RoutedEventArgs e)
@@ -48,7 +59,7 @@ namespace ES.InventoryRegister.XAML.UserControls
 
                 KeyViewModels.Add(keyViewModel);
 
-                listViewKeys.ItemsSource = KeyViewModels;
+                //listViewKeys.ItemsSource = KeyViewModels;
                 listViewKeys.Items.Refresh();
             }
         }

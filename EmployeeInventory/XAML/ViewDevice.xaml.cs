@@ -300,6 +300,7 @@ namespace ES.InventoryRegister.XAML
                 }
 
                 // Set the item source so the list view shows product keys
+                view.KeyViewModels = keyViews;
                 view.listViewKeys.ItemsSource = keyViews;
             }
 
