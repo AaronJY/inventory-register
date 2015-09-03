@@ -46,7 +46,7 @@
                             <Setter Property="Margin" Value="0"></Setter>
                         </Style>
                     </GridView.ColumnHeaderContainerStyle>
-                    <GridViewColumn Header="No." Width="40" DisplayMemberBinding="{Binding Path=Number}"/>
+                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding Path=Id}"/>
                     <GridViewColumn Header="Type" Width="110" DisplayMemberBinding="{Binding Path=TypeName}"/>
                     <GridViewColumn Header="Name" Width="134" DisplayMemberBinding="{Binding Path=Name}"/>
                     <GridViewColumn Header="Owner" Width="140" DisplayMemberBinding="{Binding Path=OwnerName}"/>
@@ -55,11 +55,6 @@
                     <GridViewColumn Header="Serial Number" Width="100" DisplayMemberBinding="{Binding Path=SerialNumber}"/>
                 </GridView>
             </ListView.View>
-            
-            <ListView.ContextMenu>
-                <ContextMenu x:Name="contextMenuInventory">
-                </ContextMenu>
-            </ListView.ContextMenu>
         </ListView>
     </Grid>
 </Window>
