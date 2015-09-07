@@ -155,6 +155,9 @@
     <Compile Include="XAML\ConfirmEmployeeDelete.xaml.cs">
       <DependentUpon>ConfirmEmployeeDelete.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XAML\CreateDepartment.xaml.cs">
+      <DependentUpon>CreateDepartment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XAML\CreateDevice.xaml.cs">
       <DependentUpon>CreateDevice.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="XAML\ConfirmEmployeeDelete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\CreateDepartment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

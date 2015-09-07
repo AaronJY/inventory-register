@@ -28,6 +28,18 @@ namespace ES.InventoryRegister.XAML
             InitializeComponent();
 
             this.Loaded += ManageDepartments_Loaded;
+            buttonAdd.Click += buttonAdd_Click;
+            listViewDepartments.SelectionChanged += listViewDepartments_SelectionChanged;
+        }
+
+        void listViewDepartments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            buttonRemove.IsEnabled = true;
+        }
+
+        void buttonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            OpenCreateDepartmentWindow();
         }
 
         void ManageDepartments_Loaded(object sender, RoutedEventArgs e)
@@ -55,6 +67,41 @@ namespace ES.InventoryRegister.XAML
 
             // Show the view models in the listView
             listViewDepartments.ItemsSource = departmentViews;
+        }
+
+        /// <summary>
+        /// Opens a new window to create a department
+        /// </summary>
+        private void OpenCreateDepartmentWindow()
+        {
+            CreateDepartment createDepartmentWindow = new CreateDepartment();
+            createDepartmentWindow.ShowDialog();
+
+            if (createDepartmentWindow.DialogResult.HasValue && createDepartmentWindow.DialogResult.Value)
+            {
+                string departmentName = createDepartmentWindow.DepartmentName;
+
+                using (BusinessManager manager = new BusinessManager())
+                {
+                    // Only create the department if it doesn't already exist
+                    // in the database
+                    if (!manager.DepartmentBusiness.DepartmentExists(departmentName))
+                    {
+                        // Create the department
+                        manager.DepartmentBusiness.CreateDepartment(departmentName);
+
+                        // Show a message
+                        MessageBox.Show(String.Format("Successfully created department '{0}'", departmentName));
+
+                        // Reload the department list from the server
+                        PopulateListWithDepartments();
+                    }
+                    else
+                    {
+                        MessageBox.Show("This department already exists in the database!", "Error");
+                    }
+                }
+            }
         }
     }
 }

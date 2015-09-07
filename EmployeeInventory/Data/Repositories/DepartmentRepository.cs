@@ -22,10 +22,34 @@ namespace ES.InventoryRegister.Data.Repositories
         /// Gets a department with a given name
         /// </summary>
         /// <param name="name">Name</param>
-        /// <returns></returns>
+        /// <returns>Result</returns>
         public Department Get(string name)
         {
             return _context.Set<Department>().FirstOrDefault(x => x.Name == name);
+        }
+
+        /// <summary>
+        /// Creates a new department in the database
+        /// </summary>
+        /// <param name="departmentName">Department name</param>
+        public void CreateDepartment(string departmentName)
+        {
+            Department department = new Department();
+            department.CreationDate = DateTime.Now;
+            department.Name = departmentName;
+
+            _context.Set<Department>().Add(department);
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Checks to see if a department exists in the database
+        /// </summary>
+        /// <param name="departmentName">Department name</param>
+        /// <returns>Result</returns>
+        public bool DepartmentExists(string departmentName)
+        {
+            return _context.Set<Department>().Any(x => x.Name == departmentName);
         }
     }
 }

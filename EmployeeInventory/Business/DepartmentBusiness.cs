@@ -28,5 +28,25 @@ namespace ES.InventoryRegister.Business
         {
             return UnitOfWork.Departments.All().ToList();
         }
+
+        /// <summary>
+        /// Asks the DepartmentRepisitory if the department already exists
+        /// in the database
+        /// </summary>
+        /// <param name="department">Department</param>
+        /// <returns></returns>
+        public bool DepartmentExists(string departmentName)
+        {
+            return UnitOfWork.Departments.DepartmentExists(departmentName);
+        }
+
+        /// <summary>
+        /// Tells the DepartmentRepisitory to create a new department
+        /// </summary>
+        /// <param name="department">Department</param>
+        public void CreateDepartment(string departmentName)
+        {
+            UnitOfWork.Departments.CreateDepartment(departmentName);
+        }
     }
 }
