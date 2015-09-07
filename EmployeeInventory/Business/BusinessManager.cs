@@ -110,6 +110,12 @@ namespace ES.InventoryRegister.Business
                 XmlElement elmtDevice = xmlDoc.CreateElement(string.Empty, "Device", string.Empty);
                 elmtDevices.AppendChild(elmtDevice);
 
+                XmlElement elmtDeviceType = xmlDoc.CreateElement("Type");
+                elmtDevice.AppendChild(elmtDeviceType);
+
+                XmlText elmtDeviceTypeVal = xmlDoc.CreateTextNode(deviceType.Name);
+                elmtDeviceType.AppendChild(elmtDeviceTypeVal);
+
                 foreach (var prop in device.GetType().GetProperties())
                 {
                     if (prop.GetValue(device) != null)
@@ -169,6 +175,37 @@ namespace ES.InventoryRegister.Business
 
                             XmlText elmtDeviceOwnerDepartmentVal = xmlDoc.CreateTextNode(owner.Department.Name);
                             elmtDeviceOwnerDepartment.AppendChild(elmtDeviceOwnerDepartmentVal);
+                        }
+                        else if (prop.Name == "DisplayInterfaces")
+                        {
+                            DisplayInterfaces interfaces = (DisplayInterfaces)propVal;
+
+                            XmlElement elmtDisplayInterfaces = xmlDoc.CreateElement("DisplayInterfaces");
+                            elmtDevice.AppendChild(elmtDisplayInterfaces);
+
+                            XmlElement elmtDisplayInterfacesVga = xmlDoc.CreateElement("VGA");
+                            elmtDisplayInterfaces.AppendChild(elmtDisplayInterfacesVga);
+
+                            XmlText elmtDisplayInterfacesVgaVal = xmlDoc.CreateTextNode(interfaces.VGA.ToString());
+                            elmtDisplayInterfacesVga.AppendChild(elmtDisplayInterfacesVgaVal);
+
+                            XmlElement elmtDisplayInterfacesDvi = xmlDoc.CreateElement("DVI");
+                            elmtDisplayInterfaces.AppendChild(elmtDisplayInterfacesDvi);
+
+                            XmlText elmtDisplayInterfacesDviVal = xmlDoc.CreateTextNode(interfaces.DVI.ToString());
+                            elmtDisplayInterfacesDvi.AppendChild(elmtDisplayInterfacesDviVal);
+
+                            XmlElement elmtDisplayInterfacesHdmi = xmlDoc.CreateElement("HDMI");
+                            elmtDisplayInterfaces.AppendChild(elmtDisplayInterfacesHdmi);
+
+                            XmlText elmtDisplayInterfacesHdmiVal = xmlDoc.CreateTextNode(interfaces.HDMI.ToString());
+                            elmtDisplayInterfacesHdmi.AppendChild(elmtDisplayInterfacesHdmiVal);
+
+                            XmlElement elmtDisplayInterfacesDisplayPort = xmlDoc.CreateElement("DisplayPort");
+                            elmtDisplayInterfaces.AppendChild(elmtDisplayInterfacesDisplayPort);
+
+                            XmlText elmtDisplayInterfacesDisplayPortVal = xmlDoc.CreateTextNode(interfaces.DisplayPort.ToString());
+                            elmtDisplayInterfacesDisplayPort.AppendChild(elmtDisplayInterfacesDisplayPortVal);
                         }
                         else
                         {
