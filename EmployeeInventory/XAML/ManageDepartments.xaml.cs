@@ -23,13 +23,43 @@ namespace ES.InventoryRegister.XAML
     /// </summary>
     public partial class ManageDepartments : Window
     {
+        List<DepartmentViewModel> departmentsSource;
+
         public ManageDepartments()
         {
             InitializeComponent();
 
             this.Loaded += ManageDepartments_Loaded;
             buttonAdd.Click += buttonAdd_Click;
+            buttonRemove.Click += buttonRemove_Click;
+            buttonRefresh.Click += buttonRefresh_Click;
             listViewDepartments.SelectionChanged += listViewDepartments_SelectionChanged;
+        }
+
+        void buttonRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            PopulateListWithDepartments();
+        }
+
+        void buttonRemove_Click(object sender, RoutedEventArgs e)
+        {
+            var selected = (DepartmentViewModel)listViewDepartments.SelectedItem;
+
+            if (selected != null)
+            {
+                var msgBoxResult = MessageBox.Show(String.Format("Are you sure you want to delete '{0}'", selected.Name), "Delete", MessageBoxButton.YesNo);
+                if (msgBoxResult == MessageBoxResult.Yes)
+                {
+                    // Remove the department from the database
+                    using (BusinessManager manager = new BusinessManager())
+                    {
+                        manager.DepartmentBusiness.RemoveDepartment(selected.Name);
+                    }
+
+                    // Refresh the department list
+                    PopulateListWithDepartments();
+                }
+            }
         }
 
         void listViewDepartments_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,11 +92,11 @@ namespace ES.InventoryRegister.XAML
             }
 
             // Covnert the departments into their respective view models
-            List<DepartmentViewModel> departmentViews = new List<DepartmentViewModel>();
-            departmentViews = Mapper.Map(departments, departmentViews).OrderBy(department => department.Name).ToList();
+            departmentsSource = new List<DepartmentViewModel>();
+            departmentsSource = Mapper.Map(departments, departmentsSource).OrderBy(department => department.Name).ToList();
 
             // Show the view models in the listView
-            listViewDepartments.ItemsSource = departmentViews;
+            listViewDepartments.ItemsSource = departmentsSource;
         }
 
         /// <summary>

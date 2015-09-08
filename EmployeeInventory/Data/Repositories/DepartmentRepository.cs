@@ -25,7 +25,7 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <returns>Result</returns>
         public Department Get(string name)
         {
-            return _context.Set<Department>().FirstOrDefault(x => x.Name == name);
+            return _context.Set<Department>().FirstOrDefault(x => (x.Name == name && x.Deleted == false));
         }
 
         /// <summary>
@@ -49,7 +49,29 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <returns>Result</returns>
         public bool DepartmentExists(string departmentName)
         {
-            return _context.Set<Department>().Any(x => x.Name == departmentName);
+            return _context.Set<Department>().Any(x => (x.Name == departmentName && x.Deleted == false));
+        }
+
+        /// <summary>
+        /// Marks a department as deleted in the database
+        /// </summary>
+        /// <param name="departmentName">Department name</param>
+        public void RemoveDepartment(string departmentName)
+        {
+            Department department = _context.Set<Department>().FirstOrDefault(x => (x.Name == departmentName && x.Deleted == false));
+            department.Deleted = true;
+            department.UpdateDate = DateTime.Now;
+
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Gets all departments in the database
+        /// </summary>
+        /// <returns>List of departments</returns>
+        public List<Department> GetDepartments()
+        {
+            return _context.Set<Department>().Where(x => x.Deleted == false).ToList();
         }
     }
 }

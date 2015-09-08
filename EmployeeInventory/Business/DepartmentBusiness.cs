@@ -26,14 +26,14 @@ namespace ES.InventoryRegister.Business
         /// <returns>Departments</returns>
         public List<Department> GetDepartments()
         {
-            return UnitOfWork.Departments.All().ToList();
+            return UnitOfWork.Departments.GetDepartments();
         }
 
         /// <summary>
         /// Asks the DepartmentRepisitory if the department already exists
         /// in the database
         /// </summary>
-        /// <param name="department">Department</param>
+        /// <param name="department">Department name</param>
         /// <returns></returns>
         public bool DepartmentExists(string departmentName)
         {
@@ -43,10 +43,19 @@ namespace ES.InventoryRegister.Business
         /// <summary>
         /// Tells the DepartmentRepisitory to create a new department
         /// </summary>
-        /// <param name="department">Department</param>
+        /// <param name="department">Department name</param>
         public void CreateDepartment(string departmentName)
         {
             UnitOfWork.Departments.CreateDepartment(departmentName);
+        }
+
+        /// <summary>
+        /// Tells the DepartmentRepository to remove an existing department
+        /// </summary>
+        /// <param name="departmentName">Department name</param>
+        public void RemoveDepartment(string departmentName)
+        {
+            UnitOfWork.Departments.RemoveDepartment(departmentName);
         }
     }
 }
