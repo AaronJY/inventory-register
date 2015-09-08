@@ -29,6 +29,7 @@
         </StackPanel>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="2">Screen Size:</TextBlock>
-        <TextBox x:Name="textBoxScreenSize" Grid.Row="2" Grid.Column="2"></TextBox>
+        <TextBox x:Name="textBoxScreenSize" Grid.Row="2" Grid.Column="2"
+                 VerticalContentAlignment="Center"></TextBox>
     </Grid>
 </UserControl>

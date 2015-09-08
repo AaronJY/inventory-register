@@ -17,6 +17,7 @@ using ES.InventoryRegister.Entities;
 using ES.InventoryRegister.Business;
 using ES.InventoryRegister.ViewModels;
 using AutoMapper;
+using System.Diagnostics;
 
 namespace ES.InventoryRegister.XAML
 {
@@ -59,7 +60,15 @@ namespace ES.InventoryRegister.XAML
                     manager.ExportAsXml(saveFileDialog.FileName);
                 }
 
-                MessageBox.Show(String.Format("Successfully exported to '{0}'.", saveFileDialog.FileName), "Success");
+                var msgBoxResult = MessageBox.Show(
+                    String.Format("Successfully exported to '{0}'. Do you you wish to view the exported file?", saveFileDialog.FileName),
+                    "Success",
+                    MessageBoxButton.YesNo);
+
+                if (msgBoxResult == MessageBoxResult.Yes)
+                {
+                    Process.Start(saveFileDialog.FileName);
+                }
             }
         }
 

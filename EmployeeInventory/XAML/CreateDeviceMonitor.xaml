@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ES.InventoryRegister.XAML.CreateDeviceMonitor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Create Device - Monitor" Height="132.667" Width="350" ResizeMode="NoResize" SizeToContent="Height" WindowStartupLocation="CenterScreen">
+        Title="Create Device" Height="132.667" Width="350" ResizeMode="NoResize" SizeToContent="Height" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>

@@ -52,12 +52,13 @@ namespace ES.InventoryRegister.XAML
             if (listViewEmployees.SelectedItem == null)
                 return;
 
-            // Create a new dialog to double check deletion
-            ConfirmEmployeeDelete dialog = new ConfirmEmployeeDelete(selectedItem.Name, selectedItem.Id);
-            dialog.ShowDialog();
+            var msgBoxResult = MessageBox.Show(
+                String.Format("Are you sure you want to delete '{0}'", selectedItem.Name),
+                "Delete",
+                MessageBoxButton.YesNo);
 
             // If the user has chosen "Yes"
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            if (msgBoxResult == MessageBoxResult.Yes)
             {
                 using (BusinessManager manager = new BusinessManager())
                 {

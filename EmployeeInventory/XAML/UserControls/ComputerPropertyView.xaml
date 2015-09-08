@@ -46,7 +46,8 @@
         <TextBlock Grid.Row="6" VerticalAlignment="Center">Disk Type:</TextBlock>
         <ComboBox x:Name="comboBoxDiskTypes" Grid.Row="6" Grid.Column="2"
                   SelectedValuePath="Type"
-                  DisplayMemberPath="Name"></ComboBox>
+                  DisplayMemberPath="Name"
+                  VerticalContentAlignment="Center"></ComboBox>
 
 
         <TextBlock Grid.Row="8" VerticalAlignment="Center">Operating System:</TextBlock>
