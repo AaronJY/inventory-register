@@ -31,7 +31,7 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <summary>
         /// Creates a new department in the database
         /// </summary>
-        /// <param name="departmentName">Department name</param>
+        /// <param name="selectedDepartmentName">Department name</param>
         public void CreateDepartment(string departmentName)
         {
             Department department = new Department();
@@ -45,7 +45,7 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <summary>
         /// Checks to see if a department exists in the database
         /// </summary>
-        /// <param name="departmentName">Department name</param>
+        /// <param name="selectedDepartmentName">Department name</param>
         /// <returns>Result</returns>
         public bool DepartmentExists(string departmentName)
         {
@@ -55,7 +55,7 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <summary>
         /// Marks a department as deleted in the database
         /// </summary>
-        /// <param name="departmentName">Department name</param>
+        /// <param name="selectedDepartmentName">Department name</param>
         public void RemoveDepartment(string departmentName)
         {
             Department department = _context.Set<Department>().FirstOrDefault(x => (x.Name == departmentName && x.Deleted == false));
@@ -72,6 +72,22 @@ namespace ES.InventoryRegister.Data.Repositories
         public List<Department> GetDepartments()
         {
             return _context.Set<Department>().Where(x => x.Deleted == false).ToList();
+        }
+
+        /// <summary>
+        /// Checks to see if a department is currently tied
+        /// to any entities in the database.
+        /// </summary>
+        /// <param name="selectedDepartmentName">Department name</param>
+        /// <returns></returns>
+        public bool IsDepartmentIsUse(string departmentName)
+        {
+            bool inUse = false;
+
+            if (_context.Set<Device>().Any(x => x.Owner.Department.Name == departmentName))
+                inUse = true;
+
+            return inUse;
         }
     }
 }

@@ -152,9 +152,6 @@
     <Compile Include="XAML\AddKey.xaml.cs">
       <DependentUpon>AddKey.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XAML\ConfirmEmployeeDelete.xaml.cs">
-      <DependentUpon>ConfirmEmployeeDelete.xaml</DependentUpon>
-    </Compile>
     <Compile Include="XAML\CreateDepartment.xaml.cs">
       <DependentUpon>CreateDepartment.xaml</DependentUpon>
     </Compile>
@@ -188,6 +185,9 @@
     <Compile Include="XAML\ManageEmployees.xaml.cs">
       <DependentUpon>ManageEmployees.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XAML\MoveDepartments.xaml.cs">
+      <DependentUpon>MoveDepartments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XAML\UserControls\ComputerPropertyView.xaml.cs">
       <DependentUpon>ComputerPropertyView.xaml</DependentUpon>
     </Compile>
@@ -204,10 +204,6 @@
       <DependentUpon>ViewDevice.xaml</DependentUpon>
     </Compile>
     <Page Include="XAML\AddKey.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="XAML\ConfirmEmployeeDelete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,6 +269,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="XAML\ManageEmployees.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\MoveDepartments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

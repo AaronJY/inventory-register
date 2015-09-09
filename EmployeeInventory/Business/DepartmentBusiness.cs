@@ -52,10 +52,21 @@ namespace ES.InventoryRegister.Business
         /// <summary>
         /// Tells the DepartmentRepository to remove an existing department
         /// </summary>
-        /// <param name="departmentName">Department name</param>
+        /// <param name="selectedDepartmentName">Department name</param>
         public void RemoveDepartment(string departmentName)
         {
             UnitOfWork.Departments.RemoveDepartment(departmentName);
+        }
+
+        /// <summary>
+        /// Asks the DepartmentRepository if the department is in use
+        /// by other entities
+        /// </summary>
+        /// <param name="selectedDepartmentName">Department name</param>
+        /// <returns>Result</returns>
+        public bool IsDepartmentInUse(string departmentName)
+        {
+            return UnitOfWork.Departments.IsDepartmentIsUse(departmentName);
         }
     }
 }

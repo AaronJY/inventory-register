@@ -44,16 +44,22 @@ namespace ES.InventoryRegister.XAML
         void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
             var selected = (DepartmentViewModel)listViewDepartments.SelectedItem;
+            var selectedDepartmentName = selected.Name;
 
             if (selected != null)
             {
-                var msgBoxResult = MessageBox.Show(String.Format("Are you sure you want to delete '{0}'", selected.Name), "Delete", MessageBoxButton.YesNo);
+                var msgBoxResult = MessageBox.Show(String.Format("Are you sure you want to delete '{0}'", selectedDepartmentName), "Delete", MessageBoxButton.YesNo);
                 if (msgBoxResult == MessageBoxResult.Yes)
                 {
                     // Remove the department from the database
                     using (BusinessManager manager = new BusinessManager())
                     {
-                        manager.DepartmentBusiness.RemoveDepartment(selected.Name);
+                        if (manager.DepartmentBusiness.IsDepartmentInUse(selectedDepartmentName))
+                        {
+                            MessageBox.Show("Department is in use");
+                        }
+
+                        //manager.DepartmentBusiness.RemoveDepartment(selectedDepartmentName);
                     }
 
                     // Refresh the department list
