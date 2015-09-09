@@ -1,9 +1,11 @@
 ﻿using ES.InventoryRegister.Entities;
+using ES.InventoryRegister.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace ES.InventoryRegister.Business
 {
@@ -67,6 +69,32 @@ namespace ES.InventoryRegister.Business
         public bool IsDepartmentInUse(string departmentName)
         {
             return UnitOfWork.Departments.IsDepartmentIsUse(departmentName);
+        }
+
+        public List<DepartmentViewModel> GetDepartmentsAsViewModels()
+        {
+            List<DepartmentViewModel> departmentModels;
+            using (BusinessManager manager = new BusinessManager())
+            {
+                // Fetch a list of departments from the database
+                List<Department> departments = GetDepartments();
+
+                // Map the departments to their respective view models
+                departmentModels = Mapper.Map<List<Department>, List<DepartmentViewModel>>(departments);
+            }
+
+            return departmentModels;
+        }
+
+        /// <summary>
+        /// Asks the DepartmentRepository for a department with
+        /// a specific name
+        /// </summary>
+        /// <param name="departmentName">Department name</param>
+        /// <returns>Department</returns>
+        public Department GetDepartment(string departmentName)
+        {
+            return UnitOfWork.Departments.GetDepartment(departmentName);
         }
     }
 }

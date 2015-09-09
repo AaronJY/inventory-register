@@ -96,7 +96,7 @@ namespace ES.InventoryRegister.XAML
                 // Create a new employee
                 Employee employee = new Employee();
                 employee.Name = name;
-                employee.Department = manager.UnitOfWork.Departments.Get(department);
+                employee.Department = manager.UnitOfWork.Departments.GetDepartment(department);
 
                 // Add it to the unit of work
                 manager.EmployeeBusiness.AddEmployee(employee);

@@ -144,6 +144,7 @@
     <Compile Include="Data\Repositories\RepositoryBase.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="ViewModels\DepartmentMoveViewModel.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DiskTypeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
@@ -175,6 +176,12 @@
     </Compile>
     <Compile Include="XAML\Error.xaml.cs">
       <DependentUpon>Error.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XAML\InputBox.xaml.cs">
+      <DependentUpon>InputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XAML\InputComboBox.xaml.cs">
+      <DependentUpon>InputComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="XAML\ManageConnections.xaml.cs">
       <DependentUpon>ManageConnections.xaml</DependentUpon>
@@ -236,6 +243,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="XAML\Error.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\InputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\InputComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

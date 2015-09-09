@@ -22,6 +22,11 @@ namespace ES.InventoryRegister.Data.Infrastructure
         {
             Mapper.CreateMap<Employee, EmployeeViewModel>();
             Mapper.CreateMap<Department, DepartmentViewModel>();
+
+            Mapper.CreateMap<Device, DepartmentMoveViewModel>()
+                .ForMember(x => x.DeviceId, opt => opt.MapFrom(args => args.Id))
+                .ForMember(x => x.MoveTo, opt => opt.Ignore());
+
             Mapper.CreateMap<KeyListViewModel, ProductKey>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ForMember(x => x.CreationDate, opt => opt.Ignore())

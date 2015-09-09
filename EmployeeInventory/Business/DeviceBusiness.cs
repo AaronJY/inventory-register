@@ -66,6 +66,21 @@ namespace ES.InventoryRegister.Business
         {
             UnitOfWork.Devices.DeleteDevice(deviceId);
         }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+
+        /// <summary>
+        /// Asks the device repository for all the devices that
+        /// are currently tied to a given department
+        /// </summary>
+        /// <param name="departmentName">Department name</param>
+        /// <returns>Devices</returns>
+        public List<Device> GetDevicesInUseByDepartment(string departmentName)
+        {
+            return UnitOfWork.Devices.GetDevicesInUseByDepartment(departmentName);
+        }
+
+        public void ChangeDepartment(int deviceId, string newDepartmentName)
+        {
+
+        }
     }
 }

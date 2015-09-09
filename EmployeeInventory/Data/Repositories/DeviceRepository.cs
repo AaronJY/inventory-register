@@ -148,5 +148,17 @@ namespace ES.InventoryRegister.Data.Repositories
 
             _context.SaveChanges();
         }
+
+        /// <summary>
+        /// Gets all devices that are associated with the given department
+        /// </summary>
+        /// <param name="department">Department name</param>
+        /// <returns>Devices</returns>
+        public List<Device> GetDevicesInUseByDepartment(string department)
+        {
+            List<Device> devices = _context.Set<Device>().Where(x => x.Owner.Department.Name == department).ToList();
+
+            return devices;
+        }
     }
 }

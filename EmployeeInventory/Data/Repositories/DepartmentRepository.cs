@@ -23,7 +23,7 @@ namespace ES.InventoryRegister.Data.Repositories
         /// </summary>
         /// <param name="name">Name</param>
         /// <returns>Result</returns>
-        public Department Get(string name)
+        public Department GetDepartment(string name)
         {
             return _context.Set<Department>().FirstOrDefault(x => (x.Name == name && x.Deleted == false));
         }

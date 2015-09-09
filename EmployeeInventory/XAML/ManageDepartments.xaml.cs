@@ -44,6 +44,9 @@ namespace ES.InventoryRegister.XAML
         void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
             var selected = (DepartmentViewModel)listViewDepartments.SelectedItem;
+            if (selected == null)
+                return;
+
             var selectedDepartmentName = selected.Name;
 
             if (selected != null)
@@ -56,10 +59,12 @@ namespace ES.InventoryRegister.XAML
                     {
                         if (manager.DepartmentBusiness.IsDepartmentInUse(selectedDepartmentName))
                         {
-                            MessageBox.Show("Department is in use");
+                            OpenMoveDepartmentsWindow(selectedDepartmentName);
                         }
-
-                        //manager.DepartmentBusiness.RemoveDepartment(selectedDepartmentName);
+                        else
+                        {
+                            manager.DepartmentBusiness.RemoveDepartment(selectedDepartmentName);
+                        }
                     }
 
                     // Refresh the department list
@@ -91,18 +96,14 @@ namespace ES.InventoryRegister.XAML
         {
             // Get departments from the server and store them in
             // a variable
-            List<Department> departments;
+            List<DepartmentViewModel> departments;
             using (BusinessManager manager = new BusinessManager())
             {
-                departments = manager.DepartmentBusiness.GetDepartments();
+                departments = manager.DepartmentBusiness.GetDepartmentsAsViewModels().OrderBy(x => x.Name).ToList();
             }
 
-            // Covnert the departments into their respective view models
-            departmentsSource = new List<DepartmentViewModel>();
-            departmentsSource = Mapper.Map(departments, departmentsSource).OrderBy(department => department.Name).ToList();
-
             // Show the view models in the listView
-            listViewDepartments.ItemsSource = departmentsSource;
+            listViewDepartments.ItemsSource = departments;
         }
 
         /// <summary>
@@ -138,6 +139,12 @@ namespace ES.InventoryRegister.XAML
                     }
                 }
             }
+        }
+
+        private void OpenMoveDepartmentsWindow(string departmentName)
+        {
+            MoveDepartments moveDepartmentsWindow = new MoveDepartments(departmentName);
+            moveDepartmentsWindow.Show();
         }
     }
 }
