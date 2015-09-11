@@ -59,7 +59,12 @@ namespace ES.InventoryRegister.XAML
                     {
                         if (manager.DepartmentBusiness.IsDepartmentInUse(selectedDepartmentName))
                         {
-                            OpenMoveDepartmentsWindow(selectedDepartmentName);
+                            MessageBox.Show(
+                                "This department can't be deleted as employees are currently assigned to it. " +
+                                "Please ensure that no employees are assigned to this department before deleting it.",
+                                "Error");
+
+                            return;
                         }
                         else
                         {
@@ -139,12 +144,6 @@ namespace ES.InventoryRegister.XAML
                     }
                 }
             }
-        }
-
-        private void OpenMoveDepartmentsWindow(string departmentName)
-        {
-            MoveDepartments moveDepartmentsWindow = new MoveDepartments(departmentName);
-            moveDepartmentsWindow.ShowDialog();
         }
     }
 }

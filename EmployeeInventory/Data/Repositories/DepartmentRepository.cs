@@ -76,15 +76,15 @@ namespace ES.InventoryRegister.Data.Repositories
 
         /// <summary>
         /// Checks to see if a department is currently tied
-        /// to any entities in the database.
+        /// to any employees in the database.
         /// </summary>
         /// <param name="selectedDepartmentName">Department name</param>
-        /// <returns></returns>
+        /// <returns>Result</returns>
         public bool IsDepartmentIsUse(string departmentName)
         {
             bool inUse = false;
 
-            if (_context.Set<Device>().Any(x => x.Owner.Department.Name == departmentName))
+            if (_context.Set<Employee>().Any(x => x.Department.Name == departmentName))
                 inUse = true;
 
             return inUse;

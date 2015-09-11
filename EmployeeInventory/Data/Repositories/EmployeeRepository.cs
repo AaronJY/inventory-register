@@ -47,10 +47,23 @@ namespace ES.InventoryRegister.Data.Repositories
         /// Get an employee from the database with a specific ID
         /// </summary>
         /// <param name="employeeId">Employee ID</param>
-        /// <returns></returns>
+        /// <returns>Employee</returns>
         public Employee GetEmployee(int employeeId)
         {
             return _context.Set<Employee>().Single(x => x.Id == employeeId);
         }
+
+        /// <summary>
+        /// Gets a list of all employees that are currently
+        /// using a given department
+        /// </summary>
+        /// <param name="departmentName">Department name</param>
+        /// <returns>List of employees</returns>
+        public List<Employee> GetEmployeesUsingDepartment(string departmentName)
+        {
+            return _context.Set<Employee>().Where(x => x.Department.Name == departmentName && x.Deleted == false).ToList();
+        }
+
+
     }
 }

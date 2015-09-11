@@ -192,9 +192,6 @@
     <Compile Include="XAML\ManageEmployees.xaml.cs">
       <DependentUpon>ManageEmployees.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XAML\MoveDepartments.xaml.cs">
-      <DependentUpon>MoveDepartments.xaml</DependentUpon>
-    </Compile>
     <Compile Include="XAML\UserControls\ComputerPropertyView.xaml.cs">
       <DependentUpon>ComputerPropertyView.xaml</DependentUpon>
     </Compile>
@@ -284,10 +281,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="XAML\ManageEmployees.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="XAML\MoveDepartments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
