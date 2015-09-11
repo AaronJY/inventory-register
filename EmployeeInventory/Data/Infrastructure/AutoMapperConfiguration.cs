@@ -37,6 +37,7 @@ namespace ES.InventoryRegister.Data.Infrastructure
                 .ForMember(x => x.PurchaseDate, opt => opt.MapFrom(args => ((DateTime)args.PurchaseDate).ToString("MMMM dd yyyy")))
                 .ForMember(x => x.ExpiryDate, opt => opt.MapFrom(args => ((DateTime)args.ExpiryDate).ToString("MMMM dd yyyy")))
                 .ForMember(x => x.OwnerName, opt => opt.MapFrom(args => args.Owner.Name))
+                .ForMember(x => x.Hidden, opt => opt.Ignore())
                 .AfterMap((src, dest) =>
                     {
                         // Set to 0 for now until I figure out how

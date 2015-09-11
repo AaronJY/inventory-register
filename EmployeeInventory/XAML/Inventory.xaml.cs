@@ -26,6 +26,8 @@ namespace ES.InventoryRegister.XAML
     /// </summary>
     public partial class Inventory : Window
     {
+        private List<InventoryItemViewModel> _items;
+
         public Inventory()
         {
             InitializeComponent();
@@ -38,10 +40,42 @@ namespace ES.InventoryRegister.XAML
             this.Closed += Inventory_Closed;
             buttonConnection.Click += buttonConnection_Click;
             buttonExportXML.Click += buttonExportXML_Click;
+            textBoxSearch.TextChanged += textBoxSearch_TextChanged;
             #endregion
 
             // Populate inventory list with devices from DB
             PopulateDeviceList();
+        }
+
+        void textBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var newText = textBoxSearch.Text.ToLower();
+            var items = listViewInventory.Items;
+
+            Console.WriteLine(newText);
+
+            if (newText.Trim() == "")
+            {
+                listViewInventory.ItemsSource = _items;
+                return;
+            }
+
+            foreach (var viewModel in _items)
+            {
+                if (viewModel.Name.ToLower().Contains(newText) ||
+                    viewModel.OwnerName.ToLower().Contains(newText) ||
+                    viewModel.SerialNumber.ToLower().Contains(newText))
+                {
+                    viewModel.Hidden = false;
+                }
+                else
+                {
+                    viewModel.Hidden = true;
+                }
+            }
+
+            listViewInventory.ItemsSource = _items.Where(x => x.Hidden == false).ToList();
+            listViewInventory.Items.Refresh();
         }
 
         void buttonExportXML_Click(object sender, RoutedEventArgs e)
@@ -121,10 +155,10 @@ namespace ES.InventoryRegister.XAML
                 // Get devices
                 devices = business.DeviceBusiness.GetDevices();
                 // 'Convert' devices to view models
-                deviceModels = Mapper.Map<List<Device>, List<InventoryItemViewModel>>(devices);
+                _items = Mapper.Map<List<Device>, List<InventoryItemViewModel>>(devices);
             }
 
-            listViewInventory.ItemsSource = deviceModels;
+            listViewInventory.ItemsSource = _items;
         }
 
         /// <summary>

@@ -26,5 +26,7 @@ namespace ES.InventoryRegister.ViewModels
         public Type Type { get; set; }
 
         public string TypeName { get; set; }
+
+        public bool Hidden { get; set; }
     }
 }
