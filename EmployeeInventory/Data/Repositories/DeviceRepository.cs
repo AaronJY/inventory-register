@@ -156,7 +156,7 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <returns>Devices</returns>
         public List<Device> GetDevicesInUseByDepartment(string department)
         {
-            List<Device> devices = _context.Set<Device>().Where(x => x.Owner.Department.Name == department).ToList();
+            List<Device> devices = _context.Set<Device>().Where(x => x.Owner.Department.Name == department && x.Deleted == false).ToList();
 
             return devices;
         }

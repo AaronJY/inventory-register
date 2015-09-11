@@ -144,7 +144,7 @@ namespace ES.InventoryRegister.XAML
         private void OpenMoveDepartmentsWindow(string departmentName)
         {
             MoveDepartments moveDepartmentsWindow = new MoveDepartments(departmentName);
-            moveDepartmentsWindow.Show();
+            moveDepartmentsWindow.ShowDialog();
         }
     }
 }

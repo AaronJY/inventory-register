@@ -133,7 +133,7 @@ namespace ES.InventoryRegister.XAML
         private void OpenManageDepartmentsWindow()
         {
             ManageDepartments manageDeparmentsWindow = new ManageDepartments();
-            manageDeparmentsWindow.Show();
+            manageDeparmentsWindow.ShowDialog();
         }
         /// <summary>
         /// Opens the window to create a new device
