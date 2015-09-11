@@ -62,11 +62,23 @@ namespace ES.InventoryRegister.XAML
             {
                 using (BusinessManager manager = new BusinessManager())
                 {
-                    // Remove employee from the list
-                    manager.EmployeeBusiness.RemoveEmployee(selectedItem.Id);
-                }
+                    // Make sure the employee isn't being used before trying to
+                    // delete it
+                    if (manager.EmployeeBusiness.IsEmployeeInUse(selectedItem.Id))
+                    {
+                        MessageBox.Show(
+                                "This employee can't be deleted as devices are currently assigned to it. " +
+                                "Please ensure that no devices are assigned to this employee before deleting it.",
+                                "Error");
+                    }
+                    else
+                    {
+                        // Remove employee from the list
+                        manager.EmployeeBusiness.RemoveEmployee(selectedItem.Id);
 
-                MessageBox.Show("Successfully deleted employee!", "Alert");
+                        MessageBox.Show("Successfully deleted employee!", "Alert");
+                    }
+                }
 
                 // Repopulate list
                 PopulateListWithEmployees();

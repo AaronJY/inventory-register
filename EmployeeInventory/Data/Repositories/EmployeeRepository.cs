@@ -64,6 +64,10 @@ namespace ES.InventoryRegister.Data.Repositories
             return _context.Set<Employee>().Where(x => x.Department.Name == departmentName && x.Deleted == false).ToList();
         }
 
+        public bool IsEmployeeInUse(int id)
+        {
+            return _context.Set<Device>().Any(x => x.Owner.Id == id && x.Owner.Deleted == false);
+        }
 
     }
 }

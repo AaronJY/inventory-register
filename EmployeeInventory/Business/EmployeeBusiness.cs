@@ -106,5 +106,16 @@ namespace ES.InventoryRegister.Business
 
             return employeeModels;
         }
+
+        /// <summary>
+        /// Asks the EmployeeRepository if the employee with
+        /// the given ID is currently being used
+        /// </summary>
+        /// <param name="employeeId">Employee ID</param>
+        /// <returns>Result</returns>
+        public bool IsEmployeeInUse(int employeeId)
+        {
+            return UnitOfWork.Employees.IsEmployeeInUse(employeeId);
+        }
     }
 }
