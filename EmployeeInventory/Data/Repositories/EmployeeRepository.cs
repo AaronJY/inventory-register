@@ -34,13 +34,10 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <param name="employeeId">Employee ID</param>
         public void RemoveEmployee(int employeeId)
         {
-            List<Device> devices = _context.Set<Device>().ToList();
-            foreach (Device device in devices)
-            {
-                Console.WriteLine(device);
-            }
+            Employee employee = GetEmployee(employeeId);
+            employee.Deleted = true;
 
-            base.Delete(employeeId);
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -50,7 +47,7 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <returns>Employee</returns>
         public Employee GetEmployee(int employeeId)
         {
-            return _context.Set<Employee>().Single(x => x.Id == employeeId);
+            return _context.Set<Employee>().Single(x => x.Id == employeeId && !x.Deleted);
         }
 
         /// <summary>
@@ -61,7 +58,7 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <returns>List of employees</returns>
         public List<Employee> GetEmployeesUsingDepartment(string departmentName)
         {
-            return _context.Set<Employee>().Where(x => x.Department.Name == departmentName && x.Deleted == false).ToList();
+            return _context.Set<Employee>().Where(x => x.Department.Name == departmentName && !x.Deleted).ToList();
         }
 
         /// <summary>
@@ -72,7 +69,7 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <returns>Result</returns>
         public bool IsEmployeeInUse(int employeeId)
         {
-            return _context.Set<Device>().Any(x => x.Owner.Id == employeeId && x.Owner.Deleted == false);
+            return _context.Set<Device>().Any(x => x.Owner.Id == employeeId && !x.Owner.Deleted);
         }
     }
 }
