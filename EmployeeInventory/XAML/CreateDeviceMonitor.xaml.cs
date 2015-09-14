@@ -54,6 +54,9 @@ namespace ES.InventoryRegister.XAML
             // Set screen size
             Entity.ScreenSize = Int32.Parse(textBoxScreenSize.Text);
 
+            if (Entity.ScreenSize > 30)
+                Console.WriteLine("Woah, that's a big'n!");
+
             DialogResult = true;
         }
     }
