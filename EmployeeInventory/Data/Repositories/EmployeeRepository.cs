@@ -64,10 +64,15 @@ namespace ES.InventoryRegister.Data.Repositories
             return _context.Set<Employee>().Where(x => x.Department.Name == departmentName && x.Deleted == false).ToList();
         }
 
-        public bool IsEmployeeInUse(int id)
+        /// <summary>
+        /// Checks if a device is currently using an employee
+        /// as its owner
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Result</returns>
+        public bool IsEmployeeInUse(int employeeId)
         {
-            return _context.Set<Device>().Any(x => x.Owner.Id == id && x.Owner.Deleted == false);
+            return _context.Set<Device>().Any(x => x.Owner.Id == employeeId && x.Owner.Deleted == false);
         }
-
     }
 }
