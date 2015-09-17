@@ -324,7 +324,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
-    <None Include="InstallSript.nsi">
+    <None Include="InstallScript.nsi">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="InventoryRegister_TemporaryKey.pfx" />
