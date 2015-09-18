@@ -18,5 +18,3 @@ Section "install"
 		CreateShortcut "$DESKTOP\Inventory Register.lnk" "$INSTDIR\Inventory Register.exe"
 	no:
 SectionEnd
-
-
