@@ -28,7 +28,7 @@ namespace ES.InventoryRegister.Business
         /// <returns>Departments</returns>
         public List<Department> GetDepartments()
         {
-            return UnitOfWork.Departments.GetDepartments();
+            return UnitOfWork.Departments.GetDepartments().OrderBy(x => x.Name).ToList();
         }
 
         /// <summary>
@@ -81,6 +81,9 @@ namespace ES.InventoryRegister.Business
 
                 // Map the departments to their respective view models
                 departmentModels = Mapper.Map<List<Department>, List<DepartmentViewModel>>(departments);
+
+                // Sort the view models
+                departmentModels = departmentModels.OrderBy(x => x.Name).ToList();
             }
 
             return departmentModels;
