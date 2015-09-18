@@ -38,7 +38,7 @@ namespace ES.InventoryRegister.Business
         /// <returns>Employees</returns>
         public List<Employee> GetEmployees()
         {
-            return UnitOfWork.Employees.All().ToList();
+            return UnitOfWork.Employees.All().OrderBy(x => x.Name).ToList();
         }
 
         /// <summary>
@@ -102,6 +102,9 @@ namespace ES.InventoryRegister.Business
                 List<Employee> employees = manager.EmployeeBusiness.GetEmployees();
                 // Map the employees to their respective view models
                 employeeModels = Mapper.Map<List<Employee>, List<EmployeeViewModel>>(employees);
+
+                // Sort the list
+                employeeModels.OrderBy(x => x.Name);
             }
 
             return employeeModels;
