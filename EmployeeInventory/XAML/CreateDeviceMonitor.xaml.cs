@@ -51,6 +51,13 @@ namespace ES.InventoryRegister.XAML
             Entity.DisplayInterfaces.HDMI = checkBoxHDMI.IsChecked ?? true;
             Entity.DisplayInterfaces.DisplayPort = checkBoxDisplayPort.IsChecked ?? true;
 
+            // Force the user to provide a screen size
+            if (textBoxScreenSize.Text == "")
+            {
+                MessageBox.Show("Please provide a screen size.", "Error");
+                return;
+            }
+
             // Set screen size
             Entity.ScreenSize = Int32.Parse(textBoxScreenSize.Text);
 
