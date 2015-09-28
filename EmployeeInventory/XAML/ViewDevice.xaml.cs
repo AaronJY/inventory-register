@@ -172,6 +172,23 @@ namespace ES.InventoryRegister.XAML
             device.Notes = textBoxNotes.Text;
             device.PurchaseDate = datePickerPurchaseDate.SelectedDate;
             device.ExpiryDate = datePickerExpiryDate.SelectedDate;
+            device.AssetNumber = numberBoxAssetNumber.Number;
+
+            if (device.AssetNumber == 0)
+            {
+                MessageBox.Show("You have provided an invalid asset number.", "Error");
+                return;
+            }
+
+            // Check if the asset number is already in use
+            using (var business = new BusinessManager())
+            {
+                if (business.DeviceBusiness.IsAssetNumberInUse(device.AssetNumber) && _device.AssetNumber != device.AssetNumber)
+                {
+                    MessageBox.Show("This asset number is already in use.", "Error");
+                    return;
+                }
+            }
 
             if (radioButtonStatusInUse.IsChecked ?? false)
                 device.Status = Device.DeviceStatus.InUse;
@@ -258,6 +275,7 @@ namespace ES.InventoryRegister.XAML
             textBoxNotes.Text = _device.Notes;
             datePickerPurchaseDate.SelectedDate = (DateTime)_device.PurchaseDate;
             datePickerExpiryDate.SelectedDate = (DateTime)_device.ExpiryDate;
+            numberBoxAssetNumber.Number = _device.AssetNumber;
 
             radioButtonStatusInUse.IsChecked =
             radioButtonStatusSpare.IsChecked =

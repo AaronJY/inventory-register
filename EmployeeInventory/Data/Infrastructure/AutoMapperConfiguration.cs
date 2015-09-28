@@ -39,6 +39,7 @@ namespace ES.InventoryRegister.Data.Infrastructure
                 .ForMember(x => x.OwnerName, opt => opt.MapFrom(args => args.Owner.Name))
                 .ForMember(x => x.Hidden, opt => opt.Ignore())
                 .ForMember(x => x.Notes, opt => opt.MapFrom(args => args.Notes))
+                .ForMember(x => x.AssetNumber, opt => opt.MapFrom(args => args.AssetNumber))
                 .AfterMap((src, dest) =>
                     {
                         // Set to 0 for now until I figure out how

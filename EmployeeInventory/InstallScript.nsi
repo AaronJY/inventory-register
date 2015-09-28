@@ -11,7 +11,6 @@ Section "install"
 	File "EntityFramework.dll"
 	File "EntityFramework.SqlServer.dll"
 	File "Inventory Register.exe"
-	File "MySql.Data.Entity.EF6.dll"
 
 	MessageBox MB_YESNO "Do you want to create a desktop shortcut?" IDYES yes IDNO no
 	yes:

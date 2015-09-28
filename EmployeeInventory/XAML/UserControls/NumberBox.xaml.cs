@@ -20,9 +20,35 @@ namespace ES.InventoryRegister.XAML.UserControls
     /// </summary>
     public partial class NumberBox : TextBox
     {
+        public int Number
+        {
+            get
+            {
+                int num;
+                if (Int32.TryParse(this.Text, out num))
+                {
+                    return num;
+                }
+                else return 0;
+            }
+
+            set
+            {
+                this.Text = value.ToString();
+            }
+        }
         public NumberBox()
         {
             InitializeComponent();
+
+            this.PreviewTextInput += NumberBox_PreviewTextInput;
+        }
+
+        private void NumberBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
         }
     }
 }
+

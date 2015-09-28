@@ -30,5 +30,7 @@ namespace ES.InventoryRegister.ViewModels
         public bool Hidden { get; set; }
 
         public string Notes { get; set; }
+
+        public int AssetNumber { get; set; }
     }
 }

@@ -66,9 +66,13 @@ namespace ES.InventoryRegister.XAML
             string model = textBoxModel.Text.Trim();
             string serialNumber = textBoxSerialNumber.Text.Trim();
             string ownerName = comboBoxOwner.Text;
+            int assetNumber = numberBoxAssetNumber.Number;
+
+           
 
             // Figure out which fields still need to be filled in
             List<string> toProvide = new List<string>();
+
             if (name == "")
                 toProvide.Add("Name");
             if (typeStr == "")
@@ -79,6 +83,8 @@ namespace ES.InventoryRegister.XAML
                 toProvide.Add("Model");
             if (serialNumber == "")
                 toProvide.Add("Serial number");
+            if (assetNumber == 0)
+                toProvide.Add("Asset Number");
 
             // If there are still fields to be filled in
             if (toProvide.Count > 0)
@@ -100,6 +106,16 @@ namespace ES.InventoryRegister.XAML
 
             DateTime? purchaseDate = datePickerPurchaseDate.SelectedDate.HasValue ? datePickerPurchaseDate.SelectedDate.Value : default(DateTime);
             DateTime? expiryDate = datePickerExpiryeDate.SelectedDate.HasValue ? datePickerExpiryeDate.SelectedDate.Value : default(DateTime);
+
+            // Do not allow the same asset number to be used more than once.
+            using (var manager = new BusinessManager())
+            {
+                if (manager.DeviceBusiness.IsAssetNumberInUse(assetNumber) || assetNumber <= 0)
+                {
+                    MessageBox.Show("The given asset number is already in use.", "Error");
+                    return;
+                }
+            }
 
             // Get entity Type from typeStr
             Type type;
@@ -127,6 +143,15 @@ namespace ES.InventoryRegister.XAML
             entity.SerialNumber = serialNumber;
             entity.PurchaseDate = purchaseDate;
             entity.ExpiryDate = expiryDate;
+            entity.AssetNumber = assetNumber;
+
+            if (radioButtonStatusInUse.IsChecked ?? false)
+                entity.Status = Device.DeviceStatus.InUse;
+            else if (radioButtonStatusSpare.IsChecked ?? false)
+                entity.Status = Device.DeviceStatus.Spare;
+            else if (radioButtonStatusToBeThrown.IsChecked ?? false)
+                entity.Status = Device.DeviceStatus.ToBeThrown;
+            else entity.Status = Device.DeviceStatus.InUse;
 
             // If no owner is selected, set them to null
             if (ownerName == "(owner)")

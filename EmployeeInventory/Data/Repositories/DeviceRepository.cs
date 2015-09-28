@@ -101,6 +101,7 @@ namespace ES.InventoryRegister.Data.Repositories
             existingDevice.Name = newDevice.Name;
             existingDevice.Notes = newDevice.Notes;
             existingDevice.Status = newDevice.Status;
+            existingDevice.AssetNumber = newDevice.AssetNumber;
 
             // Update UpdateDate
             existingDevice.UpdateDate = DateTime.Now;
@@ -157,9 +158,19 @@ namespace ES.InventoryRegister.Data.Repositories
         /// <returns>Devices</returns>
         public List<Device> GetDevicesInUseByDepartment(string department)
         {
-            List<Device> devices = _context.Set<Device>().Where(x => x.Owner.Department.Name == department && x.Deleted == false).ToList();
+            List<Device> devices = _context.Set<Device>().Where(x => x.Owner.Department.Name == department && !x.Deleted).ToList();
 
             return devices;
+        }
+
+        /// <summary>
+        /// Checks to see if an asset number is already in use
+        /// </summary>
+        /// <param name="assetNumber">Asset number</param>
+        /// <returns>Result</returns>
+        public bool IsAssetNumberInUse(int assetNumber)
+        {
+            return _context.Set<Device>().Any(x => x.AssetNumber == assetNumber && !x.Deleted);
         }
     }
 }

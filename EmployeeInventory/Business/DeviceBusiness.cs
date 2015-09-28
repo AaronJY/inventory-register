@@ -78,9 +78,15 @@ namespace ES.InventoryRegister.Business
             return UnitOfWork.Devices.GetDevicesInUseByDepartment(departmentName);
         }
 
-        public void ChangeDepartment(int deviceId, string newDepartmentName)
+        /// <summary>
+        /// Asks the device repository whether or not the given asset
+        /// number is already in use
+        /// </summary>
+        /// <param name="assetNumber">Asset number</param>
+        /// <returns>Result</returns>
+        public bool IsAssetNumberInUse(int assetNumber)
         {
-
+            return UnitOfWork.Devices.IsAssetNumberInUse(assetNumber);
         }
     }
 }
