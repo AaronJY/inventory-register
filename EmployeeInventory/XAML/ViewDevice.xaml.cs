@@ -172,7 +172,15 @@ namespace ES.InventoryRegister.XAML
             device.Notes = textBoxNotes.Text;
             device.PurchaseDate = datePickerPurchaseDate.SelectedDate;
             device.ExpiryDate = datePickerExpiryDate.SelectedDate;
-            
+
+            if (radioButtonStatusInUse.IsChecked ?? false)
+                device.Status = Device.DeviceStatus.InUse;
+            else if (radioButtonStatusSpare.IsChecked ?? false)
+                device.Status = Device.DeviceStatus.Spare;
+            else if (radioButtonStatusToBeThrown.IsChecked ?? false)
+                device.Status = Device.DeviceStatus.ToBeThrown;
+            else device.Status = Device.DeviceStatus.InUse;
+
             // Get ID of currently selected owner
             int id = ((EmployeeViewModel)comboBoxOwner.SelectedItem).Id;
             // Get the owner entity from the database
@@ -250,6 +258,17 @@ namespace ES.InventoryRegister.XAML
             textBoxNotes.Text = _device.Notes;
             datePickerPurchaseDate.SelectedDate = (DateTime)_device.PurchaseDate;
             datePickerExpiryDate.SelectedDate = (DateTime)_device.ExpiryDate;
+
+            radioButtonStatusInUse.IsChecked =
+            radioButtonStatusSpare.IsChecked =
+            radioButtonStatusToBeThrown.IsChecked = false;
+
+            if (_device.Status == Device.DeviceStatus.InUse)
+                radioButtonStatusInUse.IsChecked = true;
+            else if (_device.Status == Device.DeviceStatus.Spare)
+                radioButtonStatusSpare.IsChecked = true;
+            else if (_device.Status == Device.DeviceStatus.ToBeThrown)
+                radioButtonStatusToBeThrown.IsChecked = true;
 
             Type viewType = _propertyView.GetType();
             Type view2Type = null;

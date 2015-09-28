@@ -100,6 +100,7 @@ namespace ES.InventoryRegister.Data.Repositories
             existingDevice.SerialNumber = newDevice.SerialNumber;
             existingDevice.Name = newDevice.Name;
             existingDevice.Notes = newDevice.Notes;
+            existingDevice.Status = newDevice.Status;
 
             // Update UpdateDate
             existingDevice.UpdateDate = DateTime.Now;

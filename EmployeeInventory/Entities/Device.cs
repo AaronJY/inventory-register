@@ -10,6 +10,18 @@ namespace ES.InventoryRegister.Entities
 {
     public abstract class Device : IEntity
     {
+        public enum DeviceStatus
+        {
+            [Display(Name = "Using")]
+            InUse,
+
+            [Display(Name = "Spare")]
+            Spare,
+
+            [Display(Name = "To Be Thrown")]
+            ToBeThrown
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -34,5 +46,7 @@ namespace ES.InventoryRegister.Entities
         public string Notes { get; set; }
 
         public bool Deleted { get; set; }
+
+        public DeviceStatus Status { get; set; }
     }
 }
