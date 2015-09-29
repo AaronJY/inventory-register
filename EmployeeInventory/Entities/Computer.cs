@@ -16,14 +16,14 @@ namespace ES.InventoryRegister.Entities
     {
         public string Processor { get; set; }
 
-        public int Memory { get; set; }
+        public int? Memory { get; set; }
 
-        public int DiskSpace { get; set; }
+        public int? DiskSpace { get; set; }
 
         public DiskType? DiskType { get; set; }
 
         public string OperatingSystem { get; set; }
-
+        
         public virtual List<ProductKey> ProductKeys { get; set; }
     }
 }
