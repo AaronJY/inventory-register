@@ -36,6 +36,8 @@ namespace ES.InventoryRegister.XAML
             // Store the inventory instance so it can be accessed later
             _inventoryInstance = inventoryInstance;
 
+            numberBoxAssetNumber.Focus();
+
             PopulateOwnersDropdown();
         }
 

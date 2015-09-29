@@ -42,6 +42,8 @@ namespace ES.InventoryRegister.XAML
             textBoxMemory.PreviewTextInput += NumbericTextBoxPreviewTextInput;
             textBoxStorage.PreviewTextInput += NumbericTextBoxPreviewTextInput;
             #endregion
+
+            textBoxProcessor.Focus();
         }
 
         void NumbericTextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)

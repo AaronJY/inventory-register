@@ -31,6 +31,8 @@ namespace ES.InventoryRegister.XAML
             #region Event listeners
             buttonNext.Click += buttonNext_Click;
             #endregion
+
+            textBoxScreenSize.Focus();
         }
 
         void buttonNext_Click(object sender, RoutedEventArgs e)
