@@ -21,6 +21,7 @@ namespace ES.InventoryRegister.Data.Infrastructure
         public static void Configure()
         {
             Mapper.CreateMap<Employee, EmployeeViewModel>();
+
             Mapper.CreateMap<Department, DepartmentViewModel>();
 
             Mapper.CreateMap<Device, DepartmentMoveViewModel>()
@@ -40,6 +41,7 @@ namespace ES.InventoryRegister.Data.Infrastructure
                 .ForMember(x => x.Hidden, opt => opt.Ignore())
                 .ForMember(x => x.Notes, opt => opt.MapFrom(args => args.Notes))
                 .ForMember(x => x.AssetNumber, opt => opt.MapFrom(args => args.AssetNumber))
+                .ForMember(x => x.Status, opt => opt.MapFrom(args => args.Status))
                 .AfterMap((src, dest) =>
                     {
                         // Set to 0 for now until I figure out how

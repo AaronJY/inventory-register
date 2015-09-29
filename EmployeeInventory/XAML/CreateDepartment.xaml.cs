@@ -25,6 +25,8 @@ namespace ES.InventoryRegister.XAML
         {
             InitializeComponent();
 
+            textBoxDepartment.Focus();
+
             buttonCreate.Click += buttonCreate_Click;
         }
 

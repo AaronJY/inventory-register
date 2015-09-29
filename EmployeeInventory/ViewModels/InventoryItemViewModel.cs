@@ -32,5 +32,7 @@ namespace ES.InventoryRegister.ViewModels
         public string Notes { get; set; }
 
         public int AssetNumber { get; set; }
+
+        public Device.DeviceStatus Status { get; set; }
     }
 }

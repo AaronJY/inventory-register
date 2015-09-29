@@ -29,12 +29,14 @@ namespace ES.InventoryRegister.XAML
         public CreateEmployee(ManageEmployees parentWindow)
         {
             InitializeComponent();
-            FetchDepartments();
+
             #region Event listeners
             buttonCreate.Click += buttonCreate_Click;
             #endregion
 
             _parentWindow = parentWindow;
+
+            FetchDepartments();
 
             textBoxName.Focus();
         }

@@ -27,7 +27,10 @@ namespace ES.InventoryRegister.XAML
 
             buttonOK.Click += buttonOK_Click;
             textBoxValue.KeyDown += textBoxValue_KeyDown;
+
             ShowDialog();
+
+            textBoxValue.Focus();
         }
 
         public static InputBox Show(string value)
