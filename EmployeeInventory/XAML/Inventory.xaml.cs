@@ -62,9 +62,12 @@ namespace ES.InventoryRegister.XAML
 
             foreach (var viewModel in _items)
             {
-                if (viewModel.Name.ToLower().Contains(newText) ||
+                if (
+                    viewModel.Name.ToLower().Contains(newText) ||
                     viewModel.OwnerName.ToLower().Contains(newText) ||
-                    viewModel.SerialNumber.ToLower().Contains(newText))
+                    viewModel.SerialNumber.ToLower().Contains(newText) ||
+                    viewModel.Make.ToLower().Contains(newText) ||
+                    viewModel.Model.ToLower().Contains(newText))
                 {
                     viewModel.Hidden = false;
                 }
