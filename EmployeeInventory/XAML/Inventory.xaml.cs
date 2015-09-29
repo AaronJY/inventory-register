@@ -38,7 +38,6 @@ namespace ES.InventoryRegister.XAML
             buttonAddDevice.Click += buttonAddDevice_Click;
             listViewInventory.MouseDoubleClick += listViewInventory_MouseDoubleClick;
             this.Closed += Inventory_Closed;
-            buttonConnection.Click += buttonConnection_Click;
             buttonExportXML.Click += buttonExportXML_Click;
             textBoxSearch.TextChanged += textBoxSearch_TextChanged;
             #endregion
@@ -107,11 +106,6 @@ namespace ES.InventoryRegister.XAML
                     Process.Start(saveFileDialog.FileName);
                 }
             }
-        }
-
-        void buttonConnection_Click(object sender, RoutedEventArgs e)
-        {
-            OpenConnectionSettingsWindow();
         }
 
         void Inventory_Closed(object sender, EventArgs e)
@@ -192,6 +186,7 @@ namespace ES.InventoryRegister.XAML
 
         /// <summary>
         /// Opens the connection settings window
+        /// REMOVED BUTTON AS NO LONGER USED
         /// </summary>
         private void OpenConnectionSettingsWindow()
         {

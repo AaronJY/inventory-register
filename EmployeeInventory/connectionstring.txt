@@ -1,1 +1,0 @@
-﻿Server=webserver; Integrated Security=True; MultipleActiveResultSets=True; Database=Inventory; User ID=mt\ayarborough; Password=z59mt;

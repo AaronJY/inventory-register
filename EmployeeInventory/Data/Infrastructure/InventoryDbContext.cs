@@ -13,19 +13,7 @@ namespace ES.InventoryRegister.Data.Infrastructure
 {
     public class InventoryDbContext : DbContext
     {
-        /// <summary>
-        /// Is used by constructor to get the saved
-        /// connection string
-        /// </summary>
-        public static string connectionString
-        {
-            get
-            {
-                return DbManager.GetConnectionString();
-            }
-        }
-
-        public InventoryDbContext() : base(connectionString)
+        public InventoryDbContext() : base(Properties.Settings.Default.InventoryDbConnectionString)
         {
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
 
