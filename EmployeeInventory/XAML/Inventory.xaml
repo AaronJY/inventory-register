@@ -53,6 +53,8 @@
                     <GridViewColumn Header="Expiry Date" Width="120" DisplayMemberBinding="{Binding Path=ExpiryDate}"/>
                     <GridViewColumn Header="Serial Number" Width="100" DisplayMemberBinding="{Binding Path=SerialNumber}"/>
                     <GridViewColumn Header="Status" Width="70" DisplayMemberBinding="{Binding Path=Status}" />
+                    <GridViewColumn Header="Make" Width="150" DisplayMemberBinding="{Binding Path=Make}"/>
+                    <GridViewColumn Header="Model" Width="150" DisplayMemberBinding="{Binding Path=Model}"/>
                 </GridView>
             </ListView.View>
         </ListView>
