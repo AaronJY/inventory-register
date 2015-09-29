@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ES.InventoryRegister.XAML.Inventory"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Inventory" Height="600" Width="865" WindowStartupLocation="CenterScreen"
+        Title="Inventory (Version 1.5)" Height="600" Width="865" WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
     <Grid Margin="10,10,10,10" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
