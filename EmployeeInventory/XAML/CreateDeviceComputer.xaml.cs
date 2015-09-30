@@ -39,17 +39,9 @@ namespace ES.InventoryRegister.XAML
             buttonNext.Click += buttonNext_Click;
             buttonAddKey.Click += buttonAddKey_Click;
             buttonDeleteKey.Click += buttonDeleteKey_Click;
-            textBoxMemory.PreviewTextInput += NumbericTextBoxPreviewTextInput;
-            textBoxStorage.PreviewTextInput += NumbericTextBoxPreviewTextInput;
             #endregion
 
             textBoxProcessor.Focus();
-        }
-
-        void NumbericTextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!char.IsDigit(e.Text, e.Text.Length - 1))
-                e.Handled = true;
         }
 
         void buttonDeleteKey_Click(object sender, RoutedEventArgs e)
@@ -77,9 +69,15 @@ namespace ES.InventoryRegister.XAML
 
         void buttonNext_Click(object sender, RoutedEventArgs e)
         {
+            if (comboBoxDiskTypes.SelectedValue == null)
+            {
+                MessageBox.Show("Please provide a disk type!", "Error");
+                return;
+            }
+
             Entity.Processor = textBoxProcessor.Text.Trim();
-            Entity.Memory = Int32.Parse(textBoxMemory.Text);
-            Entity.DiskSpace = Int32.Parse(textBoxStorage.Text);
+            Entity.Memory = textBoxMemory.Number;
+            Entity.DiskSpace = textBoxStorage.Number;
             Entity.DiskType = (DiskType)Enum.Parse(typeof(DiskType), comboBoxDiskTypes.SelectedValue.ToString());
             Entity.OperatingSystem = textBoxOS.Text.Trim();
 

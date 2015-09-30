@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ES.InventoryRegister.XAML.Inventory"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Inventory (Version 1.5)" Height="600" Width="865" WindowStartupLocation="CenterScreen"
+        Title="Inventory (Version 1.17)" Height="643" Width="1282" WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
     <Grid Margin="10,10,10,10" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -9,7 +9,7 @@
             <RowDefinition Height="10"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -17,19 +17,19 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        
+
         <StackPanel Orientation="Horizontal">
             <Label Grid.Column="0" Margin="0,0,5,0">Search:</Label>
             <TextBox x:Name="textBoxSearch" Grid.Column="0" Width="330"></TextBox>
         </StackPanel>
-        
+
         <StackPanel Width="Auto" Grid.Column="5" Orientation="Horizontal">
             <Button x:Name="buttonExportXML" Padding="10,0,10,0" Margin="0,0,5,0" Height="25">Export</Button>
             <Button x:Name="buttonAddDevice" Padding="5,0,5,0" Margin="0,0,5,0" Height="25">Add Device</Button>
             <Button x:Name="buttonDepartments" Padding="5,0,5,0" Margin="0,0,5,0" Height="25">Departments</Button>
             <Button x:Name="buttonEmployees" Padding="5,0,5,0" Height="25">Employees</Button>
         </StackPanel>
-        
+
         <ListView
             x:Name="listViewInventory"
             Grid.Row="2"
@@ -38,7 +38,7 @@
             ItemsSource="{Binding Source=list}" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Height" Value="25" />
+                    <Setter Property="Height" Value="22" />
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>
@@ -52,12 +52,12 @@
                     </GridView.ColumnHeaderContainerStyle>
                     <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding Path=Id}"/>
                     <GridViewColumn Header="Asset #" Width="50" DisplayMemberBinding="{Binding Path=AssetNumber}"/>
-                    <GridViewColumn Header="Type" Width="110" DisplayMemberBinding="{Binding Path=TypeName}"/>
+                    <GridViewColumn Header="Type" Width="90" DisplayMemberBinding="{Binding Path=TypeName}"/>
                     <GridViewColumn Header="Name" Width="130" DisplayMemberBinding="{Binding Path=Name}"/>
                     <GridViewColumn Header="Owner" Width="140" DisplayMemberBinding="{Binding Path=OwnerName}"/>
-                    <GridViewColumn Header="Purchase Date" Width="120" DisplayMemberBinding="{Binding Path=PurchaseDate}"/>
-                    <GridViewColumn Header="Expiry Date" Width="120" DisplayMemberBinding="{Binding Path=ExpiryDate}"/>
-                    <GridViewColumn Header="Serial Number" Width="100" DisplayMemberBinding="{Binding Path=SerialNumber}"/>
+                    <GridViewColumn Header="Purchase Date" Width="100" DisplayMemberBinding="{Binding Path=PurchaseDate}"/>
+                    <GridViewColumn Header="Expiry Date" Width="100" DisplayMemberBinding="{Binding Path=ExpiryDate}"/>
+                    <GridViewColumn Header="Serial Number" Width="140" DisplayMemberBinding="{Binding Path=SerialNumber}"/>
                     <GridViewColumn Header="Status" Width="70" DisplayMemberBinding="{Binding Path=Status}" />
                     <GridViewColumn Header="Make" Width="100" DisplayMemberBinding="{Binding Path=Make}"/>
                     <GridViewColumn Header="Model" Width="150" DisplayMemberBinding="{Binding Path=Model}"/>
