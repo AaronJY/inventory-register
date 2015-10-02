@@ -18,6 +18,7 @@ using ES.InventoryRegister.Business;
 using ES.InventoryRegister.ViewModels;
 using AutoMapper;
 using System.Diagnostics;
+using ES.InventoryRegister.XAML.UserControls;
 
 namespace ES.InventoryRegister.XAML
 {
@@ -41,10 +42,61 @@ namespace ES.InventoryRegister.XAML
             buttonExportXML.Click += buttonExportXML_Click;
             textBoxSearch.PreviewKeyDown += TextBoxSearch_PreviewKeyDown;
             buttonCancelFilter.Click += ButtonCancelFilter_Click;
+            filterBox.buttonApply.Click += FilterBoxButtonApply_Click;
             #endregion
 
             // Populate inventory list with devices from DB
             PopulateDeviceList();
+        }
+
+        private void FilterBoxButtonApply_Click(object sender, RoutedEventArgs e)
+        {
+            string make = filterBox.textBoxMake.Text;
+            string model = filterBox.textBoxModel.Text;
+            string serialNum = filterBox.textBoxSerialNumber.Text;
+            string name = filterBox.textBoxName.Text;
+            string processor = filterBox.textBoxProcessor.Text;
+
+            bool searchPurchaseDate = filterBox.datePickerPurchaseDate.SelectedDate.HasValue;
+            string purchaseDateKeyword = filterBox.comboBoxPurchaseDateKeyword.Text;
+
+            bool searchExpiryDate = filterBox.datePickerExpiryDate.SelectedDate.HasValue;
+            string expiryDateKeyword = filterBox.comboBoxExpiryDateKeyword.Text;
+
+            bool typeLaptop = filterBox.checkBoxLaptop.IsChecked ?? false;
+            bool typeDesktop = filterBox.checkBoxDesktop.IsChecked ?? false;
+            bool typeMonitor = filterBox.checkBoxMonitor.IsChecked ?? false;
+            bool typeTablet = filterBox.checkBoxTablet.IsChecked ?? false;
+            bool typePhone = filterBox.checkBoxPhone.IsChecked ?? false;
+
+            var items = listViewInventory.Items;
+
+            foreach (var item in _items)
+            {
+                item.Hidden = false;
+
+                if (make != "" && !item.Make.Contains(make))
+                    item.Hidden = true;
+                if (model != "" && !item.Model.Contains(model))
+                    item.Hidden = true;
+                if (serialNum != "" && !item.SerialNumber.Contains(serialNum))
+                    item.Hidden = true;
+                if (name != "" && !item.Name.Contains(name))
+                    item.Hidden = true;
+
+                if (!typeLaptop && item.Type == typeof(Laptop) ||
+                    !typeDesktop && item.Type == typeof(Desktop) ||
+                    !typeMonitor && item.Type == typeof(Monitor) ||
+                    !typeTablet && item.Type == typeof(Entities.Tablet) ||
+                    !typePhone && item.Type == typeof(Phone))
+                {
+                    item.Hidden = true;
+                }
+                    
+            }
+
+            listViewInventory.ItemsSource = _items.Where(x => x.Hidden == false).ToList();
+            listViewInventory.Items.Refresh();
         }
 
         private void ButtonCancelFilter_Click(object sender, RoutedEventArgs e)
@@ -56,7 +108,12 @@ namespace ES.InventoryRegister.XAML
         {
             if (e.Key != Key.Enter) return;
 
-            ApplyFilter(textBoxSearch.Text);
+            if (textBoxSearch.Text == "newfilter")
+            {
+                OpenFilter();
+            }
+            else
+                ApplyFilter(textBoxSearch.Text);
         }
 
         void buttonExportXML_Click(object sender, RoutedEventArgs e)
@@ -215,6 +272,14 @@ namespace ES.InventoryRegister.XAML
             textBoxSearch.Text = "";
             listViewInventory.ItemsSource = _items;
             stackPanelFilter.Visibility = Visibility.Collapsed;
+
+            filterBox.Visibility = Visibility.Collapsed;
+        }
+
+        private void OpenFilter()
+        {
+            filterBox.Visibility = Visibility.Visible;
+            stackPanelFilter.Visibility = Visibility.Visible;
         }
     }
 }

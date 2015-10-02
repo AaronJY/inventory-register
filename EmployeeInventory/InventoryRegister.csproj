@@ -195,6 +195,9 @@
     <Compile Include="XAML\UserControls\ComputerPropertyView.xaml.cs">
       <DependentUpon>ComputerPropertyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XAML\UserControls\FilterBox.xaml.cs">
+      <DependentUpon>FilterBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XAML\UserControls\MonitorPropertyView.xaml.cs">
       <DependentUpon>MonitorPropertyView.xaml</DependentUpon>
     </Compile>
@@ -285,6 +288,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="XAML\UserControls\ComputerPropertyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\UserControls\FilterBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

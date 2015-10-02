@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ES.InventoryRegister.Business;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace ES.InventoryRegister.XAML.UserControls
         public FilterBox()
         {
             InitializeComponent();
+
+            LoadOwners();
+        }
+
+        void LoadOwners()
+        {
+            using (var manager = new BusinessManager())
+            {
+                comboBoxOwner.ItemsSource = manager.EmployeeBusiness.GetEmployeesAsViewModels();
+            }
         }
     }
 }

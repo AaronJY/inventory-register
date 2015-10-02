@@ -4,16 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ES.InventoryRegister.XAML.UserControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" BorderBrush="Black" Background="#FFFFFEE6">
+             mc:Ignorable="d" BorderBrush="Black" Background="#FFFFFEE6" Height="176.5"
+             BorderThickness="1" Margin="0,10,0,0" HorizontalAlignment="Stretch" Width="1437">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
             <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="5"></RowDefinition>
             <RowDefinition Height="25"></RowDefinition>
@@ -38,5 +48,74 @@
         <TextBlock VerticalAlignment="Center" Grid.Row="6">Name:</TextBlock>
         <TextBox x:Name="textBoxName"
                  Grid.Column="2" Grid.Row="6" VerticalContentAlignment="Center"></TextBox>
+
+        <TextBlock VerticalAlignment="Center" Grid.Column="4">Purchase Date:</TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Column="6">
+            <ComboBox x:Name="comboBoxPurchaseDateKeyword"
+                  Grid.Column="6" Width="80" HorizontalAlignment="Left">
+                <ComboBox.Items>
+                    <ComboBoxItem>-</ComboBoxItem>
+                    <ComboBoxItem>After</ComboBoxItem>
+                    <ComboBoxItem>Before</ComboBoxItem>
+                    <ComboBoxItem>On</ComboBoxItem>
+                </ComboBox.Items>
+            </ComboBox>
+            <DatePicker x:Name="datePickerPurchaseDate"
+                    Grid.Column="6" Width="220" HorizontalAlignment="Left"
+                        Background="White"></DatePicker>
+        </StackPanel>
+
+        <TextBlock VerticalAlignment="Center" Grid.Column="4"
+                   Grid.Row="2">Expiry Date:</TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Column="6" Grid.Row="2">
+            <ComboBox x:Name="comboBoxExpiryDateKeyword"
+                  Grid.Column="6" Width="80" HorizontalAlignment="Left">
+                <ComboBox.Items>
+                    <ComboBoxItem>-</ComboBoxItem>
+                    <ComboBoxItem>After</ComboBoxItem>
+                    <ComboBoxItem>Before</ComboBoxItem>
+                    <ComboBoxItem>On</ComboBoxItem>
+                </ComboBox.Items>
+            </ComboBox>
+            <DatePicker x:Name="datePickerExpiryDate"
+                    Grid.Column="6" Width="220" HorizontalAlignment="Left"
+                    Background="White"></DatePicker>
+        </StackPanel>
+
+        <TextBlock VerticalAlignment="Center" Grid.Column="4" Grid.Row="4">Type:</TextBlock>
+        <StackPanel Grid.Row="4" Grid.Column="6" Orientation="Horizontal">
+            <CheckBox VerticalAlignment="Center" x:Name="checkBoxLaptop"
+                      IsChecked="true">Laptop</CheckBox>
+            <CheckBox VerticalAlignment="Center" x:Name="checkBoxDesktop" Margin="5,0,0,0"
+                      IsChecked="true">Desktop</CheckBox>
+            <CheckBox VerticalAlignment="Center" x:Name="checkBoxPhone" Margin="5,0,0,0"
+                      IsChecked="True">Phone</CheckBox>
+            <CheckBox VerticalAlignment="Center" x:Name="checkBoxMonitor" Margin="5,0,0,0"
+                      IsChecked="True">Monitor</CheckBox>
+            <CheckBox VerticalAlignment="Center" x:Name="checkBoxTablet" Margin="5,0,0,0"
+                      IsChecked="True">Tablet</CheckBox>
+        </StackPanel>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="6" Grid.Column="4">Owner:</TextBlock>
+        <ComboBox x:Name="comboBoxOwner"
+                  Grid.Column="6" Grid.Row="6" VerticalContentAlignment="Center"
+                  DisplayMemberPath="{Binding Name}"></ComboBox>
+        
+        <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="4">Processor:</TextBlock>
+        <TextBox x:Name="textBoxProcessor"
+                 Grid.Column="6" Grid.Row="8" VerticalContentAlignment="Center"></TextBox>
+
+        <Grid Grid.Row="9" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="buttonApply" Grid.Column="1">Apply</Button>
+            <Button x:Name="buttonClearFilter" Grid.Column="3">Clear</Button>
+        </Grid>
     </Grid>
 </UserControl>
