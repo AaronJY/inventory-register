@@ -214,6 +214,13 @@ namespace ES.InventoryRegister.XAML
                 computer.OperatingSystem = view.textBoxOS.Text;
                 computer.DiskType = (DiskType)view.comboBoxDiskTypes.SelectedValue;
 
+                if (computer.DiskType == null)
+                {
+                    MessageBox.Show("Please provide a disk type!");
+                    return;
+                }
+
+
                 // Turn product key view models into product keys
                 computer.ProductKeys = Mapper.Map<List<KeyListViewModel>, List<ProductKey>>((List<KeyListViewModel>)view.listViewKeys.ItemsSource);
 

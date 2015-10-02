@@ -39,45 +39,24 @@ namespace ES.InventoryRegister.XAML
             listViewInventory.MouseDoubleClick += listViewInventory_MouseDoubleClick;
             this.Closed += Inventory_Closed;
             buttonExportXML.Click += buttonExportXML_Click;
-            textBoxSearch.TextChanged += textBoxSearch_TextChanged;
+            textBoxSearch.PreviewKeyDown += TextBoxSearch_PreviewKeyDown;
+            buttonCancelFilter.Click += ButtonCancelFilter_Click;
             #endregion
 
             // Populate inventory list with devices from DB
             PopulateDeviceList();
         }
 
-        void textBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        private void ButtonCancelFilter_Click(object sender, RoutedEventArgs e)
         {
-            var newText = textBoxSearch.Text.ToLower();
-            var items = listViewInventory.Items;
+            CancelFilter();
+        }
 
-            Console.WriteLine(newText);
+        private void TextBoxSearch_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
 
-            if (newText.Trim() == "")
-            {
-                listViewInventory.ItemsSource = _items;
-                return;
-            }
-
-            foreach (var viewModel in _items)
-            {
-                if (
-                    viewModel.Name.ToLower().Contains(newText) ||
-                    viewModel.OwnerName.ToLower().Contains(newText) ||
-                    viewModel.SerialNumber.ToLower().Contains(newText) ||
-                    viewModel.Make.ToLower().Contains(newText) ||
-                    viewModel.Model.ToLower().Contains(newText))
-                {
-                    viewModel.Hidden = false;
-                }
-                else
-                {
-                    viewModel.Hidden = true;
-                }
-            }
-
-            listViewInventory.ItemsSource = _items.Where(x => x.Hidden == false).ToList();
-            listViewInventory.Items.Refresh();
+            ApplyFilter(textBoxSearch.Text);
         }
 
         void buttonExportXML_Click(object sender, RoutedEventArgs e)
@@ -192,6 +171,50 @@ namespace ES.InventoryRegister.XAML
         {
             ManageConnections manageConnectionsWindow = new ManageConnections();
             manageConnectionsWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// Filters devices based on passed in text
+        /// </summary>
+        /// <param name="filterText">Filter text</param>
+        private void ApplyFilter(string filterText)
+        {
+            var newText = filterText.ToLower();
+            var items = listViewInventory.Items;
+
+            if (newText == "")
+            {
+                CancelFilter();
+                return;
+            }
+
+            stackPanelFilter.Visibility = Visibility.Visible;
+
+            foreach (var viewModel in _items)
+            {
+                if (viewModel.Name.ToLower().Contains(newText) ||
+                    viewModel.OwnerName.ToLower().Contains(newText) ||
+                    viewModel.SerialNumber.ToLower().Contains(newText) ||
+                    viewModel.Make.ToLower().Contains(newText) ||
+                    viewModel.Model.ToLower().Contains(newText))
+                {
+                    viewModel.Hidden = false;
+                }
+                else
+                {
+                    viewModel.Hidden = true;
+                }
+            }
+
+            listViewInventory.ItemsSource = _items.Where(x => x.Hidden == false).ToList();
+            listViewInventory.Items.Refresh();
+        }
+
+        private void CancelFilter()
+        {
+            textBoxSearch.Text = "";
+            listViewInventory.ItemsSource = _items;
+            stackPanelFilter.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -1,4 +1,4 @@
-!define version "1.17"
+!define version "1.19"
 
 Name "Inventory Register Installer Version ${version}"
 OutFile "IR Installer ${version}.exe"
