@@ -41,10 +41,16 @@ namespace ES.InventoryRegister.XAML
             this.Closed += Inventory_Closed;
             buttonExportXML.Click += buttonExportXML_Click;
             filterBox.buttonApply.Click += FilterBoxButtonApply_Click;
+            buttonFilter.Click += ButtonFilter_Click;
             #endregion
 
             // Populate inventory list with devices from DB
             PopulateDeviceList();
+        }
+
+        private void ButtonFilter_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFilter();
         }
 
         private void FilterBoxButtonApply_Click(object sender, RoutedEventArgs e)
