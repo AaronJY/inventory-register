@@ -208,18 +208,18 @@ namespace ES.InventoryRegister.XAML
             {
                 ComputerPropertyView view = _propertyView as ComputerPropertyView;
                 Computer computer = device as Computer;
+
+                if (view.comboBoxDiskTypes.SelectedValue == null)
+                {
+                    MessageBox.Show("Please provide a disk type!", "Error");
+                    return;
+                }
+
                 computer.Processor = view.textBoxProcessor.Text;
                 computer.DiskSpace = Int32.Parse(view.textBoxStorage.Text);
                 computer.Memory = Int32.Parse(view.textBoxMemory.Text);
                 computer.OperatingSystem = view.textBoxOS.Text;
                 computer.DiskType = (DiskType)view.comboBoxDiskTypes.SelectedValue;
-
-                if (computer.DiskType == null)
-                {
-                    MessageBox.Show("Please provide a disk type!");
-                    return;
-                }
-
 
                 // Turn product key view models into product keys
                 computer.ProductKeys = Mapper.Map<List<KeyListViewModel>, List<ProductKey>>((List<KeyListViewModel>)view.listViewKeys.ItemsSource);
