@@ -52,7 +52,13 @@ namespace ES.InventoryRegister.XAML
         /// <param name="message">Message</param>
         public static void Show(Exception ex, string message)
         {
-            using (FileStream fs = new FileStream("ExceptionLog.txt", FileMode.Append, FileAccess.Write))
+            var folderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "InventoryRegister");
+            var fileName = System.IO.Path.Combine(folderPath, "ExceptionLog.txt");
+
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            using (FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write))
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.WriteLine(String.Format("{0}{2}{1}{2}", DateTime.Now.ToString(), ex.ToString(), Environment.NewLine));
