@@ -99,7 +99,7 @@
         <TextBlock VerticalAlignment="Center" Grid.Row="6" Grid.Column="4">Owner:</TextBlock>
         <ComboBox x:Name="comboBoxOwner"
                   Grid.Column="6" Grid.Row="6" VerticalContentAlignment="Center"
-                  DisplayMemberPath="{Binding Name}"></ComboBox>
+                  DisplayMemberPath="Name"></ComboBox>
         
         <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="4">Processor:</TextBlock>
         <TextBox x:Name="textBoxProcessor"

@@ -366,6 +366,21 @@
   <ItemGroup>
     <None Include="Resources\Icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon-New.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon-Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon-Export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon-Employees.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon-Departments.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -40,8 +40,6 @@ namespace ES.InventoryRegister.XAML
             listViewInventory.MouseDoubleClick += listViewInventory_MouseDoubleClick;
             this.Closed += Inventory_Closed;
             buttonExportXML.Click += buttonExportXML_Click;
-            textBoxSearch.PreviewKeyDown += TextBoxSearch_PreviewKeyDown;
-            buttonCancelFilter.Click += ButtonCancelFilter_Click;
             filterBox.buttonApply.Click += FilterBoxButtonApply_Click;
             #endregion
 
@@ -92,7 +90,6 @@ namespace ES.InventoryRegister.XAML
                 {
                     item.Hidden = true;
                 }
-                    
             }
 
             listViewInventory.ItemsSource = _items.Where(x => x.Hidden == false).ToList();
@@ -102,18 +99,6 @@ namespace ES.InventoryRegister.XAML
         private void ButtonCancelFilter_Click(object sender, RoutedEventArgs e)
         {
             CancelFilter();
-        }
-
-        private void TextBoxSearch_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Enter) return;
-
-            if (textBoxSearch.Text == "newfilter")
-            {
-                OpenFilter();
-            }
-            else
-                ApplyFilter(textBoxSearch.Text);
         }
 
         void buttonExportXML_Click(object sender, RoutedEventArgs e)
@@ -230,48 +215,9 @@ namespace ES.InventoryRegister.XAML
             manageConnectionsWindow.ShowDialog();
         }
 
-        /// <summary>
-        /// Filters devices based on passed in text
-        /// </summary>
-        /// <param name="filterText">Filter text</param>
-        private void ApplyFilter(string filterText)
-        {
-            var newText = filterText.ToLower();
-            var items = listViewInventory.Items;
-
-            if (newText == "")
-            {
-                CancelFilter();
-                return;
-            }
-
-            stackPanelFilter.Visibility = Visibility.Visible;
-
-            foreach (var viewModel in _items)
-            {
-                if (viewModel.Name.ToLower().Contains(newText) ||
-                    viewModel.OwnerName.ToLower().Contains(newText) ||
-                    viewModel.SerialNumber.ToLower().Contains(newText) ||
-                    viewModel.Make.ToLower().Contains(newText) ||
-                    viewModel.Model.ToLower().Contains(newText))
-                {
-                    viewModel.Hidden = false;
-                }
-                else
-                {
-                    viewModel.Hidden = true;
-                }
-            }
-
-            listViewInventory.ItemsSource = _items.Where(x => x.Hidden == false).ToList();
-            listViewInventory.Items.Refresh();
-        }
-
         private void CancelFilter()
         {
-            textBoxSearch.Text = "";
             listViewInventory.ItemsSource = _items;
-            stackPanelFilter.Visibility = Visibility.Collapsed;
 
             filterBox.Visibility = Visibility.Collapsed;
         }
@@ -279,7 +225,6 @@ namespace ES.InventoryRegister.XAML
         private void OpenFilter()
         {
             filterBox.Visibility = Visibility.Visible;
-            stackPanelFilter.Visibility = Visibility.Visible;
         }
     }
 }

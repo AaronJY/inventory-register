@@ -20,27 +20,41 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal">
-            <Label Grid.Column="0" Margin="0,0,5,0">Search:</Label>
-            <TextBox x:Name="textBoxSearch" Grid.Column="0" Width="330">
-                <TextBox.InputBindings>
-                    <KeyBinding Command="{Binding SomeCommand}" Key="Return" />
-                    <KeyBinding Command="{Binding SomeCommand}" Key="Enter" />
-                </TextBox.InputBindings>
-            </TextBox>
-            <StackPanel x:Name="stackPanelFilter" Orientation="Horizontal"
-                        Visibility="Hidden">
-                <Label x:Name="labelFilter">Filter Applied</Label>
-                <Button x:Name="buttonCancelFilter" Width="30">X</Button>
-            </StackPanel>
-            
-        </StackPanel>
+        <StackPanel Width="Auto" Grid.Column="0" Orientation="Horizontal">
+            <Button x:Name="buttonAddDevice" Padding="5,0,5,0" Margin="0,0,5,0" Height="25">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Icon-New.png" Margin="0,0,5,0"></Image>
+                    <TextBlock VerticalAlignment="Center">Add Device</TextBlock>
+                </StackPanel>
+            </Button>
 
-        <StackPanel Width="Auto" Grid.Column="5" Orientation="Horizontal">
-            <Button x:Name="buttonExportXML" Padding="10,0,10,0" Margin="0,0,5,0" Height="25">Export</Button>
-            <Button x:Name="buttonAddDevice" Padding="5,0,5,0" Margin="0,0,5,0" Height="25">Add Device</Button>
-            <Button x:Name="buttonDepartments" Padding="5,0,5,0" Margin="0,0,5,0" Height="25">Departments</Button>
-            <Button x:Name="buttonEmployees" Padding="5,0,5,0" Height="25">Employees</Button>
+            <Button x:Name="buttonDepartments" Padding="5,0,5,0" Margin="0,0,5,0" Height="25">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Icon-Departments.png" Margin="0,0,5,0"></Image>
+                    <TextBlock VerticalAlignment="Center">Departments</TextBlock>
+                </StackPanel>
+            </Button>
+            
+            <Button x:Name="buttonEmployees" Padding="5,0,5,0" Height="25" Margin="0,0,5,0">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Icon-Employees.png" Margin="0,0,5,0"></Image>
+                    <TextBlock VerticalAlignment="Center">Employees</TextBlock>
+                </StackPanel>
+            </Button>
+            
+            <Button x:Name="buttonFilter" Padding="5,0,5,0" Height="25" Margin="0,0,5,0">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Icon-Search.png" Margin="0,0,5,0"></Image>
+                    <TextBlock VerticalAlignment="Center">Filter</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="buttonExportXML" Padding="5,0,5,0" Height="25">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Icon-Export.png" Margin="0,0,5,0"></Image>
+                    <TextBlock VerticalAlignment="Center">Export</TextBlock>
+                </StackPanel>
+            </Button>
         </StackPanel>
 
         <usercontrols:FilterBox x:Name="filterBox" Grid.Row="1" Height="Auto" Width="Auto" Visibility="Collapsed"
