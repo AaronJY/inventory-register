@@ -1,4 +1,5 @@
 ﻿using ES.InventoryRegister.Entities;
+using ES.InventoryRegister.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,6 +88,13 @@ namespace ES.InventoryRegister.Business
         public bool IsAssetNumberInUse(int assetNumber)
         {
             return UnitOfWork.Devices.IsAssetNumberInUse(assetNumber);
+        }
+
+        public void GetComputerAsViewModel(int deviceId)
+        {
+            Computer entity = (Computer)UnitOfWork.Devices.GetDevice(deviceId);
+
+            Console.WriteLine(entity.Processor);
         }
     }
 }

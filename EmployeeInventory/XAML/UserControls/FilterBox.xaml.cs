@@ -42,6 +42,9 @@ namespace ES.InventoryRegister.XAML.UserControls
             buttonClearOwner.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Loads a list of employees from the database into the owners combo box
+        /// </summary>
         void LoadOwners()
         {
             using (var manager = new BusinessManager())

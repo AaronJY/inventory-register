@@ -144,6 +144,7 @@
     <Compile Include="Data\Repositories\RepositoryBase.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="ViewModels\ComputerViewModel.cs" />
     <Compile Include="ViewModels\DepartmentMoveViewModel.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DiskTypeViewModel.cs" />
@@ -380,6 +381,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icon-Departments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon-Refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />

@@ -51,10 +51,18 @@
                 </StackPanel>
             </Button>
 
-            <Button x:Name="buttonExportXML" Padding="5,0,5,0" Height="25">
+            <Button x:Name="buttonExportXML" Padding="5,0,5,0" Height="25" Margin="0,0,5,0">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../Resources/Icon-Export.png" Margin="0,0,5,0"></Image>
                     <TextBlock VerticalAlignment="Center">Export</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="buttonRefresh" Padding="5,0,5,0" Height="25">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Icon-Refresh.png" Margin="0,0,5,0"
+                           ToolTip="Refresh the inventory list with most recent data from the database."></Image>
+                    <TextBlock VerticalAlignment="Center">Reload</TextBlock>
                 </StackPanel>
             </Button>
         </StackPanel>

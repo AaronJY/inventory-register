@@ -1,24 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ES.InventoryRegister.Data.Infrastructure;
 using ES.InventoryRegister.Entities;
 using ES.InventoryRegister.Business;
 using ES.InventoryRegister.ViewModels;
 using AutoMapper;
 using System.Diagnostics;
-using ES.InventoryRegister.XAML.UserControls;
 
 namespace ES.InventoryRegister.XAML
 {
@@ -42,9 +31,15 @@ namespace ES.InventoryRegister.XAML
             buttonExportXML.Click += buttonExportXML_Click;
             filterBox.buttonApply.Click += FilterBoxButtonApply_Click;
             buttonFilter.Click += ButtonFilter_Click;
+            buttonRefresh.Click += ButtonRefresh_Click;
             #endregion
 
             // Populate inventory list with devices from DB
+            PopulateDeviceList();
+        }
+
+        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        {
             PopulateDeviceList();
         }
 
@@ -106,6 +101,16 @@ namespace ES.InventoryRegister.XAML
                 {
                     item.Hidden = true;
                 }
+
+                if (item.Type.IsSubclassOf(typeof(Computer)))
+                {
+                    string processor;
+                    using (var manager = new BusinessManager())
+                    {
+                        manager.DeviceBusiness.GetComputerAsViewModel(item.Id);
+                    }
+                } 
+
             }
 
             listViewInventory.ItemsSource = _items.Where(x => x.Hidden == false).ToList();

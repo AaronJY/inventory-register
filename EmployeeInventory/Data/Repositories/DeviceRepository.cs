@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using ES.InventoryRegister.XAML;
+using ES.InventoryRegister.ViewModels;
 
 namespace ES.InventoryRegister.Data.Repositories
 {

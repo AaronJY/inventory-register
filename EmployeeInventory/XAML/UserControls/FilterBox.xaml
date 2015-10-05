@@ -139,8 +139,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox x:Name="comboBoxDiskType"
-                  Grid.Column="0" VerticalContentAlignment="Center"
-                  DisplayMemberPath="Name">
+                  Grid.Column="0" VerticalContentAlignment="Center">
                 <ComboBox.Items>
                     <ComboBoxItem>HDD</ComboBoxItem>
                     <ComboBoxItem>SSD</ComboBoxItem>
