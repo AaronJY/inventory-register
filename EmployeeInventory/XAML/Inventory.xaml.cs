@@ -50,7 +50,9 @@ namespace ES.InventoryRegister.XAML
 
         private void ButtonFilter_Click(object sender, RoutedEventArgs e)
         {
-            OpenFilter();
+            if (filterBox.Visibility == Visibility.Visible)
+                CancelFilter();
+            else OpenFilter();
         }
 
         private void FilterBoxButtonApply_Click(object sender, RoutedEventArgs e)
@@ -59,7 +61,11 @@ namespace ES.InventoryRegister.XAML
             string model = filterBox.textBoxModel.Text;
             string serialNum = filterBox.textBoxSerialNumber.Text;
             string name = filterBox.textBoxName.Text;
-            string processor = filterBox.textBoxProcessor.Text;
+            int assetNumber = filterBox.numberBoxAssetNumber.Number;
+
+            string ownerName = "";
+            if (filterBox.comboBoxOwner.SelectedValue != null)
+                ownerName = ((EmployeeViewModel)filterBox.comboBoxOwner.SelectedValue).Name;
 
             bool searchPurchaseDate = filterBox.datePickerPurchaseDate.SelectedDate.HasValue;
             string purchaseDateKeyword = filterBox.comboBoxPurchaseDateKeyword.Text;
@@ -86,6 +92,10 @@ namespace ES.InventoryRegister.XAML
                 if (serialNum != "" && !item.SerialNumber.Contains(serialNum))
                     item.Hidden = true;
                 if (name != "" && !item.Name.Contains(name))
+                    item.Hidden = true;
+                if (ownerName != "" && item.OwnerName != ownerName)
+                    item.Hidden = true;
+                if (filterBox.numberBoxAssetNumber.Text != "" && item.AssetNumber != assetNumber)
                     item.Hidden = true;
 
                 if (!typeLaptop && item.Type == typeof(Laptop) ||
@@ -226,11 +236,13 @@ namespace ES.InventoryRegister.XAML
             listViewInventory.ItemsSource = _items;
 
             filterBox.Visibility = Visibility.Collapsed;
+            buttonFilterLabel.Text = "Filter";
         }
 
         private void OpenFilter()
         {
             filterBox.Visibility = Visibility.Visible;
+            buttonFilterLabel.Text = "Close Filter";
         }
     }
 }

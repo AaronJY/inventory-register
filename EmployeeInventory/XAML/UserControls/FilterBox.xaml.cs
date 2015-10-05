@@ -26,6 +26,20 @@ namespace ES.InventoryRegister.XAML.UserControls
             InitializeComponent();
 
             LoadOwners();
+
+            comboBoxOwner.SelectionChanged += ComboBoxOwner_SelectionChanged;
+            buttonClearOwner.Click += ButtonClearOwner_Click;
+        }
+
+        private void ComboBoxOwner_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            buttonClearOwner.IsEnabled = true;
+        }
+
+        private void ButtonClearOwner_Click(object sender, RoutedEventArgs e)
+        {
+            comboBoxOwner.SelectedItem = null;
+            buttonClearOwner.IsEnabled = false;
         }
 
         void LoadOwners()

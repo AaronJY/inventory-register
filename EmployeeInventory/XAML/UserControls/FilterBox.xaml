@@ -97,13 +97,23 @@
         </StackPanel>
 
         <TextBlock VerticalAlignment="Center" Grid.Row="6" Grid.Column="4">Owner:</TextBlock>
-        <ComboBox x:Name="comboBoxOwner"
-                  Grid.Column="6" Grid.Row="6" VerticalContentAlignment="Center"
+        <Grid Row="6" Column="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox x:Name="comboBoxOwner"
+                  Grid.Column="0" VerticalContentAlignment="Center"
                   DisplayMemberPath="Name"></ComboBox>
+            <Button x:Name="buttonClearOwner" Grid.Column="2" IsEnabled="False">X</Button>
+        </Grid>
         
-        <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="4">Processor:</TextBlock>
-        <TextBox x:Name="textBoxProcessor"
-                 Grid.Column="6" Grid.Row="8" VerticalContentAlignment="Center"></TextBox>
+        
+        <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="4">Asset Num:</TextBlock>
+        <local:NumberBox x:Name="numberBoxAssetNumber"
+                 Grid.Column="6" Grid.Row="8" VerticalContentAlignment="Center"></local:NumberBox>
 
         <Grid Grid.Row="9" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
