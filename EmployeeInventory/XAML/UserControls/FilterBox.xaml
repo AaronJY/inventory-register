@@ -18,7 +18,11 @@
             <ColumnDefinition Width="10"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
-            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="220"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -110,11 +114,65 @@
             <Button x:Name="buttonClearOwner" Grid.Column="2" IsEnabled="False">X</Button>
         </Grid>
         
-        
         <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="4">Asset Num:</TextBlock>
         <local:NumberBox x:Name="numberBoxAssetNumber"
                  Grid.Column="6" Grid.Row="8" VerticalContentAlignment="Center"></local:NumberBox>
 
+        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="8">Processor:</TextBlock>
+        <TextBox x:Name="textBoxProcessor"
+                 Grid.Column="10" Grid.Row="0" VerticalContentAlignment="Center"></TextBox>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="8">Memory (GB):</TextBlock>
+        <local:NumberBox x:Name="numberBoxMemory"
+                 Grid.Column="10" Grid.Row="2" VerticalContentAlignment="Center"></local:NumberBox>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="4" Grid.Column="8">Disk Space (GB):</TextBlock>
+        <local:NumberBox x:Name="numberBoxDiskSpace"
+                 Grid.Column="10" Grid.Row="4" VerticalContentAlignment="Center"></local:NumberBox>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="6" Grid.Column="8">Disk Type:</TextBlock>
+        <Grid Row="6" Column="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox x:Name="comboBoxDiskType"
+                  Grid.Column="0" VerticalContentAlignment="Center"
+                  DisplayMemberPath="Name">
+                <ComboBox.Items>
+                    <ComboBoxItem>HDD</ComboBoxItem>
+                    <ComboBoxItem>SSD</ComboBoxItem>
+                </ComboBox.Items>
+            </ComboBox>
+            <Button x:Name="buttonClearDiskType" Grid.Column="2" IsEnabled="False">X</Button>
+        </Grid>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="10" Grid.Column="8">Operating System:</TextBlock>
+        <TextBox x:Name="textBoxOperatingSystem"
+                 Grid.Column="10" Grid.Row="10" VerticalContentAlignment="Center"></TextBox>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="12">Has Camera:</TextBlock>
+        <CheckBox x:Name="checkBoxHasCamera" Grid.Row="0" Grid.Column="14"
+                  VerticalAlignment="Center"></CheckBox>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="12">Display Interfaces:</TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="14">
+            <CheckBox x:Name="checkBoxInterfaceVga" VerticalAlignment="Center"
+                      Margin="0,0,5,0">VGA</CheckBox>
+            <CheckBox x:Name="checkBoxInterfaceDvi" VerticalAlignment="Center"
+                      Margin="0,0,5,0">DVI</CheckBox>
+            <CheckBox x:Name="checkBoxInterfaceHdmi" VerticalAlignment="Center"
+                      Margin="0,0,5,0">HDMI</CheckBox>
+            <CheckBox x:Name="checkBoxInterfaceDisplayPort" VerticalAlignment="Center"
+                      Margin="0,0,5,0">DispalyPort</CheckBox>
+        </StackPanel>
+
+        <TextBlock VerticalAlignment="Center" Grid.Row="4" Grid.Column="12">Monitor Size:</TextBlock>
+        <local:NumberBox x:Name="numberBoxMonitorSize"
+                 Grid.Column="14" Grid.Row="4" VerticalContentAlignment="Center"></local:NumberBox>
+        
         <Grid Grid.Row="9" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
