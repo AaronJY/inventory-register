@@ -78,6 +78,8 @@ namespace ES.InventoryRegister.XAML
 
             foreach (var item in _items)
             {
+                BusinessManager manager = new BusinessManager();
+
                 item.Hidden = false;
 
                 if (make != "" && !item.Make.Contains(make))
@@ -104,13 +106,73 @@ namespace ES.InventoryRegister.XAML
 
                 if (item.Type.IsSubclassOf(typeof(Computer)))
                 {
-                    string processor;
-                    using (var manager = new BusinessManager())
-                    {
-                        manager.DeviceBusiness.GetComputerAsViewModel(item.Id);
-                    }
-                } 
+                    string processor = filterBox.textBoxProcessor.Text;
+                    int memory = filterBox.numberBoxMemory.Number;
+                    string memoryText = filterBox.numberBoxMemory.Text;
+                    int diskSpace = filterBox.numberBoxDiskSpace.Number;
+                    string diskSpaceText = filterBox.numberBoxDiskSpace.Text;
+                    string diskType = filterBox.comboBoxDiskType.Text;
+                    string operatingSystem = filterBox.textBoxOperatingSystem.Text;
 
+                    Computer computer = (Computer)manager.DeviceBusiness.GetDevice(item.Id);
+
+                    if (processor != "" && !computer.Processor.Contains(processor))
+                        item.Hidden = true;
+                    if (memoryText != "" && computer.Memory != memory)
+                        item.Hidden = true;
+                    if (diskSpaceText != "" && computer.DiskSpace != diskSpace)
+                        item.Hidden = true;
+                    if (diskType != "")
+                    {
+                        DiskType diskTypeVal;
+                        if (diskType == "HDD")
+                            diskTypeVal = DiskType.HDD;
+                        else if (diskType == "SSD")
+                            diskTypeVal = DiskType.SSD;
+                        else diskTypeVal = DiskType.HDD;
+
+                        if (diskTypeVal != computer.DiskType)
+                            item.Hidden = true;
+                    }
+                    if (operatingSystem != "" && !computer.OperatingSystem.Contains(operatingSystem))
+                        item.Hidden = true;
+
+                    if (item.Type == typeof(Phone))
+                    {
+                        bool hasCamera = filterBox.checkBoxHasCamera.IsChecked ?? false;
+
+                        Phone phone = computer as Phone;
+
+                        if (!hasCamera)
+                            item.Hidden = true;
+                    }
+                }
+
+                if (item.Type == typeof(Monitor))
+                {
+                    int screenSize = filterBox.numberBoxMonitorSize.Number;
+                    string screenSizeText = filterBox.numberBoxMonitorSize.Text;
+                    bool interfaceVga = filterBox.checkBoxInterfaceVga.IsChecked ?? false;
+                    bool interfaceDvi = filterBox.checkBoxInterfaceDvi.IsChecked ?? false;
+                    bool interfaceHdmi = filterBox.checkBoxInterfaceHdmi.IsChecked ?? false;
+                    bool interfaceDisplayPort = filterBox.checkBoxInterfaceDisplayPort.IsChecked ?? false;
+
+                    Monitor monitor = (Monitor)manager.DeviceBusiness.GetDevice(item.Id);
+
+                    if (screenSizeText != "" && screenSize != monitor.ScreenSize)
+                        item.Hidden = true;
+
+                    if (interfaceVga && !monitor.DisplayInterfaces.VGA)
+                        item.Hidden = true;
+                    if (interfaceDvi && !monitor.DisplayInterfaces.DVI)
+                        item.Hidden = true;
+                    if (interfaceHdmi && !monitor.DisplayInterfaces.HDMI)
+                        item.Hidden = true;
+                    if (interfaceDisplayPort && !monitor.DisplayInterfaces.DisplayPort)
+                        item.Hidden = true;
+                }
+
+                manager.Dispose();
             }
 
             listViewInventory.ItemsSource = _items.Where(x => x.Hidden == false).ToList();
